@@ -1,0 +1,67 @@
+import FormGroup from "@/_components/FormGroup";
+import Label from "@/_components/Label";
+import Input from "@/_components/Input";
+import Select from "@/_components/Select";
+import CustomDatePicker from "@/_components/CustomDatePicker";
+
+const FormUsuarioDadosPessoais = ({obj, onChange}) => {
+	return (
+		<>
+			<FormGroup className={'mb-3'}>
+				<Label htmlFor={'nome'} label={'*Nome'}/>
+				<Input
+					id={'nome'}
+					placeholder={'Nome'}
+					value={obj.nome}
+					onChange={onChange}
+				/>
+			</FormGroup>
+
+			<div className={'row'}>
+				<FormGroup className={'mb-3 col-sm-6'}>
+					<Label htmlFor={'genero'} label={'*Gênero'}/>
+					<Select
+						id={'genero'}
+						value={obj.genero}
+						onChange={onChange}
+						options={[]}
+					/>
+				</FormGroup>
+
+				<FormGroup className={'mb-3 col-sm-6'}>
+					<Label htmlFor={'dataNascimento'} label={'*Data de nascimento'}/>
+					<CustomDatePicker
+						id={'dataNascimento'}
+						placeholder={'Data de nascimento'}
+						value={obj.dataNascimento}
+						onChange={onChange}
+					/>
+				</FormGroup>
+			</div>
+
+			<div className={'row'}>
+				<FormGroup className={'mb-3 mb-sm-0 col-sm-6'}>
+					<Label htmlFor={'email'} label={'*E-mail'}/>
+					<Input
+						id={'email'}
+						placeholder={'E-mail'}
+						value={obj.email}
+						onChange={onChange}
+					/>
+				</FormGroup>
+
+				<FormGroup className={'col-sm-6'}>
+					<Label htmlFor={'cpf'} label={'*CPF'}/>
+					<Input
+						id={'cpf'}
+						placeholder={'CPF'}
+						value={obj.cpf}
+						onChange={onChange}
+					/>
+				</FormGroup>
+			</div>
+		</>
+	);
+};
+
+export default FormUsuarioDadosPessoais;
