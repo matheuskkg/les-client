@@ -3,13 +3,24 @@ import {useState} from "react";
 import {defaultDadosPessoais} from "@/utils/DefaultValues";
 import Card from "@/_components/Card";
 import Button from "@/_components/Button";
+import FormTelefone from "@/_components/FormTelefone";
 
 const DadosPessoais = () => {
-	const [dadosPessoais, setDadosPessoais] = useState(defaultDadosPessoais)
+	const [usuario, setUsuario] = useState(defaultDadosPessoais)
+	const [telefone, setTelefone] = useState(defaultDadosPessoais)
 
-	function handleChange(e) {
+	function handleChangeUsuario(e) {
 		const {id, value} = e.target;
-		setDadosPessoais({...dadosPessoais, [id]: value});
+		setUsuario({...usuario, [id]: value});
+	}
+
+	function handleChangeTelefone(e) {
+		const {id, value} = e.target;
+		setTelefone({...telefone, [id]: value});
+	}
+
+	function handleSubmit() {
+
 	}
 
 	return (
@@ -21,21 +32,28 @@ const DadosPessoais = () => {
 
 				<Card.Body>
 					<FormUsuarioDadosPessoais
-						obj={dadosPessoais}
-						onChange={handleChange}
+						obj={usuario}
+						onChange={handleChangeUsuario}
+					/>
+
+					<hr />
+
+					<FormTelefone
+						obj={telefone}
+						onChange={handleChangeTelefone}
 					/>
 				</Card.Body>
 
 				<Card.Footer className={'bg-transparent'}>
 					<Button
 						className={'w-100 my-1 my-sm-0'}
-						icon={<i className="bi bi-person-add"></i>}
+						icon={<i className="bi bi-person-check"></i>}
 						text={'Salvar'}
 						variant={'primary'}
+						onClick={handleSubmit}
 					/>
 				</Card.Footer>
 			</Card>
-
 		</>
 	);
 };

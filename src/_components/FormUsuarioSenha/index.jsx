@@ -2,11 +2,21 @@ import FormGroup from "@/_components/FormGroup";
 import Label from "@/_components/Label";
 import Input from "@/_components/Input";
 
-const FormUsuarioSenha = ({obj, onChange}) => {
+const FormUsuarioSenha = ({obj, onChange, display}) => {
+	let senhaClassName
+	let senhaConfirmarClassName
+	if (display === 'column') {
+		senhaClassName = 'col-12 mb-3';
+		senhaConfirmarClassName = 'col-12'
+	} else {
+		senhaClassName = 'col-sm-6 mb-3 mb-sm-0'
+		senhaConfirmarClassName = 'col-sm-6'
+	}
+
 	return (
 		<>
 			<div className={'row'}>
-				<FormGroup className={'mb-3 mb-sm-0 col-sm-6'}>
+				<FormGroup className={`${senhaClassName}`}>
 					<Label htmlFor={'senha'} label={'*Senha'}/>
 					<Input
 						id={'senha'}
@@ -17,7 +27,7 @@ const FormUsuarioSenha = ({obj, onChange}) => {
 					/>
 				</FormGroup>
 
-				<FormGroup className={'col-sm-6'}>
+				<FormGroup className={`${senhaConfirmarClassName}`}>
 					<Label htmlFor={'senhaConfirmar'} label={'*Confirmar senha'}/>
 					<Input
 						id={'senhaConfirmar'}
