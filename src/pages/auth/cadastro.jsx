@@ -15,23 +15,23 @@ const CadastroUsuario = () => {
 	const [endereco, setEndereco] = useState(defaultEndereco)
 
 	function handleChangeUsuario(e) {
-		const {id, value} = e.target;
-		setUsuario({...usuario, [id]: value});
+		const {name, value} = e.target;
+		setUsuario({...usuario, [name]: value});
 	}
 
 	function handleChangeSenha(e) {
-		const {id, value} = e.target;
-		setSenha({...senha, [id]: value});
+		const {name, value} = e.target;
+		setSenha({...senha, [name]: value});
 	}
 
 	function handleChangeTelefone(e) {
-		const {id, value} = e.target;
-		setTelefone({...telefone, [id]: value});
+		const {name, value} = e.target;
+		setTelefone({...telefone, [name]: value});
 	}
 
 	function handleChangeEndereco(e) {
-		const {id, value} = e.target;
-		setEndereco({...endereco, [id]: value});
+		const {name, value} = e.target;
+		setEndereco({...endereco, [name]: value});
 	}
 
 	function handleSubmit() {

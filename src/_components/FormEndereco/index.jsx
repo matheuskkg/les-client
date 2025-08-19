@@ -11,6 +11,7 @@ const FormEndereco = ({obj, onChange}) => {
 				<Label htmlFor={'nomeEnd'} label={'*Nome identificador'}/>
 				<Input
 					id={'nomeEnd'}
+					name={'nomeIdentificador'}
 					placeholder={'Nome identificador'}
 					value={obj.nome}
 					onChange={onChange}
@@ -22,6 +23,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'pais'} label={'*Pais'}/>
 					<Input
 						id={'pais'}
+						name={'pais'}
 						placeholder={'Pais'}
 						value={obj.pais}
 						onChange={onChange}
@@ -32,6 +34,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'estado'} label={'*Estado'}/>
 					<Input
 						id={'estado'}
+						name={'estado'}
 						placeholder={'Estado'}
 						value={obj.estado}
 						onChange={onChange}
@@ -42,6 +45,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'cidade'} label={'*Cidade'}/>
 					<Input
 						id={'cidade'}
+						name={'cidade'}
 						placeholder={'Cidade'}
 						value={obj.cidade}
 						onChange={onChange}
@@ -54,7 +58,8 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'tipoLog'} label={'*Tipo de logradouro'}/>
 					<Select
 						id={'tipoLog'}
-						value={obj.tipoLogradouro}
+						name={'tipoLogradouro.tipo'}
+						value={obj.tipoLogradouro.tipo}
 						onChange={onChange}
 						options={[]}
 					/>
@@ -64,6 +69,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'logradouro'} label={'*Logradouro'}/>
 					<Input
 						id={'logradouro'}
+						name={'logradouro'}
 						placeholder={'Logradouro'}
 						value={obj.logradouro}
 						onChange={onChange}
@@ -76,7 +82,8 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'tipoRes'} label={'*Tipo de residência'}/>
 					<Select
 						id={'tipoRes'}
-						value={obj.tipoResidencia}
+						name={'tipoResidencia.tipo'}
+						value={obj.tipoResidencia.tipo}
 						onChange={onChange}
 						options={[]}
 					/>
@@ -86,8 +93,9 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'numeroEndereco'} label={'*Número'}/>
 					<Input
 						id={'numeroEndereco'}
+						name={'numero'}
 						placeholder={'Número'}
-						value={obj.numeroEndereco}
+						value={obj.numero}
 						onChange={onChange}
 					/>
 				</FormGroup>
@@ -98,6 +106,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'bairro'} label={'*Bairro'}/>
 					<Input
 						id={'bairro'}
+						name={'bairro'}
 						placeholder={'Bairro'}
 						value={obj.bairro}
 						onChange={onChange}
@@ -108,6 +117,7 @@ const FormEndereco = ({obj, onChange}) => {
 					<Label htmlFor={'cep'} label={'*CEP'}/>
 					<Input
 						id={'cep'}
+						name={'cep'}
 						placeholder={'CEP'}
 						value={obj.cep}
 						onChange={onChange}
@@ -119,6 +129,7 @@ const FormEndereco = ({obj, onChange}) => {
 				<Label htmlFor={'observacao'} label={'Observação'}/>
 				<Input
 					id={'observacao'}
+					name={'observacao'}
 					placeholder={'Observação'}
 					value={obj.observacao}
 					onChange={onChange}
@@ -128,12 +139,12 @@ const FormEndereco = ({obj, onChange}) => {
 			<div className={'row'}>
 				<div className={'d-flex'}>
 					<FormGroup className={'me-3'}>
-						<Checkbox id={'cobranca'} value={obj.cobranca} onChange={onChange}/>
+						<Checkbox id={'cobranca'} name={'cobranca'} value={obj.cobranca} onChange={onChange}/>
 						<Label htmlFor={'cobranca'} label={'Cobrança'} variant={'check-label'} className={'ms-1'}/>
 					</FormGroup>
 
 					<FormGroup>
-						<Checkbox id={'entrega'} value={obj.entrega} onChange={onChange}/>
+						<Checkbox id={'entrega'} name={'entrega'} value={obj.entrega} onChange={onChange}/>
 						<Label htmlFor={'entrega'} label={'Entrega'} variant={'check-label'} className={'ms-1'}/>
 					</FormGroup>
 				</div>

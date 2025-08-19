@@ -4,6 +4,7 @@ import { parse, format } from "date-fns"
 const CustomDatePicker = (
 	{
 		id,
+		name,
 		className,
 		placeholder,
 		value,
@@ -52,6 +53,7 @@ const CustomDatePicker = (
 		<>
 			<DatePicker
 				id={id}
+				name={name}
 				className={`form-control ${className}`}
 				wrapperClassName={'form-control'}
 				placeholderText={placeholder}

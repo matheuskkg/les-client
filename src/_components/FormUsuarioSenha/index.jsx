@@ -20,6 +20,7 @@ const FormUsuarioSenha = ({obj, onChange, display}) => {
 					<Label htmlFor={'senha'} label={'*Senha'}/>
 					<Input
 						id={'senha'}
+						name={'senha'}
 						placeholder={'Senha'}
 						type={'password'}
 						value={obj.senha}
@@ -31,6 +32,7 @@ const FormUsuarioSenha = ({obj, onChange, display}) => {
 					<Label htmlFor={'senhaConfirmar'} label={'*Confirmar senha'}/>
 					<Input
 						id={'senhaConfirmar'}
+						name={'senhaConfirmar'}
 						placeholder={'Confirmar senha'}
 						type={'password'}
 						value={obj.senhaConfirmar}

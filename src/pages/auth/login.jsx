@@ -13,8 +13,8 @@ const Login = () => {
 	})
 
 	function handleChange(e) {
-		const {id, value} = e.target;
-		setLogin({...login, [id]: value});
+		const {name, value} = e.target;
+		setLogin({...login, [name]: value});
 	}
 
 	function handleSubmit() {
@@ -33,6 +33,7 @@ const Login = () => {
 						<Label htmlFor={'email'} label={'*E-mail'}/>
 						<Input
 							id={'email'}
+							name={'email'}
 							placeholder={'E-mail'}
 							value={login.email}
 							onChange={handleChange}
@@ -43,6 +44,8 @@ const Login = () => {
 						<Label htmlFor={'senha'} label={'*Senha'}/>
 						<Input
 							id={'senha'}
+							name={'senha'}
+							type={'password'}
 							placeholder={'Senha'}
 							value={login.senha}
 							onChange={handleChange}

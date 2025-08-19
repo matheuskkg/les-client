@@ -18,8 +18,10 @@ export function defaultSenha() {
 export function defaultTelefone() {
 	return {
 		ddd: '',
-		tipoTelefone: '',
-		numeroTelefone: '',
+		tipoTelefone: {
+			tipo: '',
+		},
+		numero: '',
 	}
 }
 
@@ -29,10 +31,14 @@ export function defaultEndereco() {
 		pais: '',
 		estado: '',
 		cidade: '',
-		tipoLogradouro: '',
+		tipoLogradouro: {
+			tipo: '',
+		},
 		logradouro: '',
-		tipoResidencia: '',
-		numeroEndereco: '',
+		tipoResidencia: {
+			tipo: '',
+		},
+		numero: '',
 		bairro: '',
 		cep: '',
 		observacao: '',

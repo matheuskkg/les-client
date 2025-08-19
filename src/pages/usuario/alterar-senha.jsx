@@ -8,8 +8,8 @@ const AlterarSenha = () => {
 	const [senha, setSenha] = useState(defaultSenha)
 
 	function handleChange(e) {
-		const {id, value} = e.target
-		setSenha({...senha, [id]: value})
+		const {name, value} = e.target
+		setSenha({...senha, [name]: value})
 	}
 
 	function handleSubmit() {
@@ -31,8 +31,9 @@ const AlterarSenha = () => {
 					/>
 				</Card.Body>
 
-				<Card.Footer>
+				<Card.Footer className={'bg-transparent'}>
 					<Button
+						className={'w-100'}
 						variant={'primary'}
 						icon={<i className="bi bi-key"></i>}
 						text={'Alterar'}

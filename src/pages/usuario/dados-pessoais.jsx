@@ -10,13 +10,13 @@ const DadosPessoais = () => {
 	const [telefone, setTelefone] = useState(defaultDadosPessoais)
 
 	function handleChangeUsuario(e) {
-		const {id, value} = e.target;
-		setUsuario({...usuario, [id]: value});
+		const {name, value} = e.target;
+		setUsuario({...usuario, [name]: value});
 	}
 
 	function handleChangeTelefone(e) {
-		const {id, value} = e.target;
-		setTelefone({...telefone, [id]: value});
+		const {name, value} = e.target;
+		setTelefone({...telefone, [name]: value});
 	}
 
 	function handleSubmit() {

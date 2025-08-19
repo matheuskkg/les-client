@@ -11,6 +11,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 				<Label htmlFor={'nome'} label={'*Nome'}/>
 				<Input
 					id={'nome'}
+					name={'nome'}
 					placeholder={'Nome'}
 					value={obj.nome}
 					onChange={onChange}
@@ -22,6 +23,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 					<Label htmlFor={'genero'} label={'*Gênero'}/>
 					<Select
 						id={'genero'}
+						name={'genero'}
 						value={obj.genero}
 						onChange={onChange}
 						options={[]}
@@ -32,6 +34,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 					<Label htmlFor={'dataNascimento'} label={'*Data de nascimento'}/>
 					<CustomDatePicker
 						id={'dataNascimento'}
+						name={'dataNascimento'}
 						placeholder={'Data de nascimento'}
 						value={obj.dataNascimento}
 						onChange={onChange}
@@ -44,6 +47,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 					<Label htmlFor={'email'} label={'*E-mail'}/>
 					<Input
 						id={'email'}
+						name={'email'}
 						placeholder={'E-mail'}
 						value={obj.email}
 						onChange={onChange}
@@ -54,6 +58,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 					<Label htmlFor={'cpf'} label={'*CPF'}/>
 					<Input
 						id={'cpf'}
+						name={'cpf'}
 						placeholder={'CPF'}
 						value={obj.cpf}
 						onChange={onChange}

@@ -11,6 +11,7 @@ const FormTelefone = ({obj, onChange}) => {
 					<Label htmlFor={'ddd'} label={'*DDD'}/>
 					<Input
 						id={'ddd'}
+						name={'ddd'}
 						placeholder={'DDD'}
 						value={obj.ddd}
 						onChange={onChange}
@@ -21,7 +22,8 @@ const FormTelefone = ({obj, onChange}) => {
 					<Label htmlFor={'tipoTel'} label={'*Tipo de telefone'}/>
 					<Select
 						id={'tipoTel'}
-						value={obj.tipoTelefone}
+						name={'tipoTelefone.tipo'}
+						value={obj.tipoTelefone.tipo}
 						onChange={onChange}
 						options={[]}
 					/>
@@ -31,8 +33,9 @@ const FormTelefone = ({obj, onChange}) => {
 					<Label htmlFor={'numeroTelefone'} label={'*Número'}/>
 					<Input
 						id={'numeroTelefone'}
+						name={'numero'}
 						placeholder={'Número'}
-						value={obj.numeroTelefone}
+						value={obj.numero}
 						onChange={onChange}
 					/>
 				</FormGroup>
