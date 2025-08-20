@@ -1,0 +1,7 @@
+.ant-picker-input > input::placeholder {
+    color: var(--bs-secondary-color) !important;
+}
+
+.ant-picker-suffix {
+    color: #000 !important;
+}

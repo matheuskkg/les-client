@@ -1,12 +1,12 @@
-import {useState} from "react";
-import Link from "next/link";
-import Card from "@/_components/Card";
-import Button from "@/_components/Button";
-import FormUsuarioDadosPessoais from "@/_components/FormUsuarioDadosPessoais";
-import FormUsuarioSenha from "@/_components/FormUsuarioSenha";
-import FormTelefone from "@/_components/FormTelefone";
-import FormEndereco from "@/_components/FormEndereco";
-import {defaultDadosPessoais, defaultEndereco, defaultSenha, defaultTelefone} from "@/utils/DefaultValues";
+import Button from '@/_components/Button'
+import Card from '@/_components/Card'
+import FormEndereco from '@/_components/FormEndereco'
+import FormTelefone from '@/_components/FormTelefone'
+import FormUsuarioDadosPessoais from '@/_components/FormUsuarioDadosPessoais'
+import FormUsuarioSenha from '@/_components/FormUsuarioSenha'
+import {defaultDadosPessoais, defaultEndereco, defaultSenha, defaultTelefone} from '@/utils/DefaultValues'
+import Link from 'next/link'
+import {useState} from 'react'
 
 const CadastroUsuario = () => {
 	const [usuario, setUsuario] = useState(defaultDadosPessoais)
@@ -16,7 +16,8 @@ const CadastroUsuario = () => {
 
 	function handleChangeUsuario(e) {
 		const {name, value} = e.target;
-		setUsuario({...usuario, [name]: value});
+		setUsuario({...usuario, [name]: value})
+		console.log(usuario)
 	}
 
 	function handleChangeSenha(e) {
