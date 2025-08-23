@@ -143,7 +143,7 @@ const ConsultaEnderecos = () => {
 								<h3 className={'m-0'}>Endereços</h3>
 
 								<Link
-									href={'/'}
+									href={'/usuario/endereco/cadastro'}
 									className={'btn btn-sm btn-dark'}
 								>
 									Cadastrar endereço
@@ -196,7 +196,7 @@ const ConsultaEnderecos = () => {
 								className={'w-100'}
 								icon={<i className="bi bi-x-lg"></i>}
 								text={'Cancelar'}
-								variant={'light'}
+								variant={'dark'}
 								onClick={closeModalEditar}
 							/>
 						</div>
@@ -216,7 +216,7 @@ const ConsultaEnderecos = () => {
 								className={'w-100 me-2'}
 								icon={<i className="bi bi-x-lg"></i>}
 								text={'Cancelar'}
-								variant={'light'}
+								variant={'dark'}
 								onClick={closeModalExcluir}
 							/>
 

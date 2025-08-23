@@ -6,7 +6,6 @@ const Checkbox = ({id, name, value, onChange}) => {
 				name={name}
 				type={'checkbox'}
 				className={'form-check-input'}
-				value={value}
 				checked={value}
 				onChange={onChange}
 			/>

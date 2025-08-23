@@ -30,8 +30,9 @@ const CadastroUsuario = () => {
 	}
 
 	function handleChangeEndereco(e) {
-		const {name, value} = e.target
-		setEndereco({...endereco, [name]: value})
+		const {name, type, value, checked} = e.target
+		const inputValue = type === 'checkbox' ? checked : value
+		setEndereco({...endereco, [name]: inputValue})
 	}
 
 	function handleSubmit(e) {
@@ -76,7 +77,15 @@ const CadastroUsuario = () => {
 					</Card.Body>
 
 					<Card.Footer className={'bg-transparent'}>
-						<div className="d-sm-flex justify-content-sm-between align-items-sm-center">
+						<div
+							className="d-flex justify-content-sm-between align-items-sm-center flex-column-reverse flex-sm-row"
+						>
+							<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
+																			className={'link-underline link-underline-opacity-0'}
+							>
+								Faça o login</Link>.
+							</p>
+
 							<div>
 								<Button
 									type={'submit'}
@@ -86,12 +95,6 @@ const CadastroUsuario = () => {
 									variant={'dark'}
 									onClick={handleSubmit}
 								/>
-							</div>
-
-							<div>
-								<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
-																				className={'link-underline link-underline-opacity-0'}>Faça
-									o login</Link>.</p>
 							</div>
 						</div>
 					</Card.Footer>
