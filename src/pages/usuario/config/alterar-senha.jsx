@@ -1,6 +1,6 @@
-import Button from '@/_components/Button'
-import Card from '@/_components/Card'
-import FormUsuarioSenha from '@/_components/FormUsuarioSenha'
+import Button from '@/_components/core/Button'
+import Card from '@/_components/core/Card'
+import FormUsuarioSenha from '@/_components/usuario/FormUsuarioSenha'
 import {defaultSenha} from '@/utils/DefaultValues'
 import {useState} from 'react'
 
@@ -34,7 +34,7 @@ const AlterarSenha = () => {
 				<Card.Footer className={'bg-transparent'}>
 					<Button
 						className={'w-100'}
-						variant={'primary'}
+						variant={'dark'}
 						icon={<i className="bi bi-key"></i>}
 						text={'Alterar'}
 						onClick={handleSubmit}

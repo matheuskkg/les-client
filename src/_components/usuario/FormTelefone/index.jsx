@@ -1,7 +1,7 @@
-import FormGroup from "@/_components/FormGroup";
-import Label from "@/_components/Label";
-import Input from "@/_components/Input";
-import Select from "@/_components/Select";
+import FormGroup from '@/_components/core/FormGroup'
+import Input from '@/_components/core/Input'
+import Label from '@/_components/core/Label'
+import Select from '@/_components/core/Select'
 
 const FormTelefone = ({obj, onChange}) => {
 	return (

@@ -1,8 +1,8 @@
-import FormGroup from "@/_components/FormGroup";
-import Label from "@/_components/Label";
-import Input from "@/_components/Input";
-import Select from "@/_components/Select";
-import Checkbox from "@/_components/Checkbox";
+import Checkbox from '@/_components/core/Checkbox'
+import FormGroup from '@/_components/core/FormGroup'
+import Input from '@/_components/core/Input'
+import Label from '@/_components/core/Label'
+import Select from '@/_components/core/Select'
 
 const FormEndereco = ({obj, onChange}) => {
 	return (
@@ -13,7 +13,7 @@ const FormEndereco = ({obj, onChange}) => {
 					id={'nomeEnd'}
 					name={'nomeIdentificador'}
 					placeholder={'Nome identificador'}
-					value={obj.nome}
+					value={obj.nomeIdentificador}
 					onChange={onChange}
 				/>
 			</FormGroup>

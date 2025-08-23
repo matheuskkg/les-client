@@ -1,13 +1,13 @@
-import FormUsuarioDadosPessoais from "@/_components/FormUsuarioDadosPessoais";
-import {useState} from "react";
-import {defaultDadosPessoais} from "@/utils/DefaultValues";
-import Card from "@/_components/Card";
-import Button from "@/_components/Button";
-import FormTelefone from "@/_components/FormTelefone";
+import Button from '@/_components/core/Button'
+import Card from '@/_components/core/Card'
+import FormTelefone from '@/_components/usuario/FormTelefone'
+import FormUsuarioDadosPessoais from '@/_components/usuario/FormUsuarioDadosPessoais'
+import {defaultDadosPessoais, defaultTelefone} from '@/utils/DefaultValues'
+import {useState} from 'react'
 
 const DadosPessoais = () => {
 	const [usuario, setUsuario] = useState(defaultDadosPessoais)
-	const [telefone, setTelefone] = useState(defaultDadosPessoais)
+	const [telefone, setTelefone] = useState(defaultTelefone)
 
 	function handleChangeUsuario(e) {
 		const {name, value} = e.target;
@@ -49,7 +49,7 @@ const DadosPessoais = () => {
 						className={'w-100 my-1 my-sm-0'}
 						icon={<i className="bi bi-person-check"></i>}
 						text={'Salvar'}
-						variant={'primary'}
+						variant={'dark'}
 						onClick={handleSubmit}
 					/>
 				</Card.Footer>

@@ -1,25 +1,10 @@
 import React from 'react'
 
-const getChildrenOnDisplayName = (children, displayName) => {
-	return React.Children.toArray(children).filter(
-		(child) =>
-			React.isValidElement(child) &&
-			child.type &&
-			child.type.displayName === displayName
-	);
-}
-
 const Card = ({children, className}) => {
-	const [header] = getChildrenOnDisplayName(children, 'Header');
-	const [body] = getChildrenOnDisplayName(children, 'Body');
-	const [footer] = getChildrenOnDisplayName(children, 'Footer');
-
 	return (
 		<>
 			<div className={`card ${className}`}>
-				{header}
-				{body}
-				{footer}
+				{children}
 			</div>
 		</>
 	);
@@ -34,7 +19,6 @@ const Header = ({children, className}) => {
 		</>
 	);
 };
-Header.displayName = 'Header';
 Card.Header = Header;
 
 const Body = ({children, className}) => {
@@ -46,7 +30,6 @@ const Body = ({children, className}) => {
 		</>
 	);
 };
-Body.displayName = 'Body';
 Card.Body = Body;
 
 const Footer = ({children, className}) => {
@@ -58,7 +41,6 @@ const Footer = ({children, className}) => {
 		</>
 	);
 };
-Footer.displayName = 'Footer';
 Card.Footer = Footer;
 
 export default Card;

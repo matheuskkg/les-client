@@ -1,10 +1,10 @@
-import {useState} from "react";
-import FormGroup from "@/_components/FormGroup";
-import Label from "@/_components/Label";
-import Input from "@/_components/Input";
-import Card from "@/_components/Card";
-import Button from "@/_components/Button";
-import Link from "next/link";
+import Button from '@/_components/core/Button'
+import Card from '@/_components/core/Card'
+import FormGroup from '@/_components/core/FormGroup'
+import Input from '@/_components/core/Input'
+import Label from '@/_components/core/Label'
+import Link from 'next/link'
+import {useState} from 'react'
 
 const Login = () => {
 	const [login, setLogin] = useState({
@@ -59,7 +59,7 @@ const Login = () => {
 							className={'w-100 my-1'}
 							icon={<i className="bi bi-box-arrow-in-right"></i>}
 							text={'Entrar'}
-							variant={'primary'}
+							variant={'dark'}
 							onClick={handleSubmit}
 						/>
 					</div>

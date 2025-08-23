@@ -1,5 +1,3 @@
-'use client'
-
 import {DatePicker} from 'antd'
 import dayjs from 'dayjs'
 

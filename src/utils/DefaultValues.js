@@ -42,7 +42,7 @@ export function defaultEndereco() {
 		bairro: '',
 		cep: '',
 		observacao: '',
-		cobranca: '',
-		entrega: '',
+		cobranca: false,
+		entrega: false,
 	}
 }

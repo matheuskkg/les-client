@@ -1,6 +1,6 @@
-import FormGroup from "@/_components/FormGroup";
-import Label from "@/_components/Label";
-import Input from "@/_components/Input";
+import FormGroup from '@/_components/core/FormGroup'
+import Input from '@/_components/core/Input'
+import Label from '@/_components/core/Label'
 
 const FormUsuarioSenha = ({obj, onChange, display}) => {
 	let senhaClassName

@@ -1,9 +1,9 @@
-import Button from '@/_components/Button'
-import Card from '@/_components/Card'
-import FormEndereco from '@/_components/FormEndereco'
-import FormTelefone from '@/_components/FormTelefone'
-import FormUsuarioDadosPessoais from '@/_components/FormUsuarioDadosPessoais'
-import FormUsuarioSenha from '@/_components/FormUsuarioSenha'
+import Button from '@/_components/core/Button'
+import Card from '@/_components/core/Card'
+import FormEndereco from '@/_components/endereco/FormEndereco'
+import FormTelefone from '@/_components/usuario/FormTelefone'
+import FormUsuarioDadosPessoais from '@/_components/usuario/FormUsuarioDadosPessoais'
+import FormUsuarioSenha from '@/_components/usuario/FormUsuarioSenha'
 import {defaultDadosPessoais, defaultEndereco, defaultSenha, defaultTelefone} from '@/utils/DefaultValues'
 import Link from 'next/link'
 import {useState} from 'react'
@@ -15,27 +15,27 @@ const CadastroUsuario = () => {
 	const [endereco, setEndereco] = useState(defaultEndereco)
 
 	function handleChangeUsuario(e) {
-		const {name, value} = e.target;
+		const {name, value} = e.target
 		setUsuario({...usuario, [name]: value})
-		console.log(usuario)
 	}
 
 	function handleChangeSenha(e) {
-		const {name, value} = e.target;
-		setSenha({...senha, [name]: value});
+		const {name, value} = e.target
+		setSenha({...senha, [name]: value})
 	}
 
 	function handleChangeTelefone(e) {
-		const {name, value} = e.target;
-		setTelefone({...telefone, [name]: value});
+		const {name, value} = e.target
+		setTelefone({...telefone, [name]: value})
 	}
 
 	function handleChangeEndereco(e) {
-		const {name, value} = e.target;
-		setEndereco({...endereco, [name]: value});
+		const {name, value} = e.target
+		setEndereco({...endereco, [name]: value})
 	}
 
-	function handleSubmit() {
+	function handleSubmit(e) {
+		e.preventDefault()
 
 	}
 
@@ -46,56 +46,59 @@ const CadastroUsuario = () => {
 					<h3 className={'my-2'}>Cadastro de usuário</h3>
 				</Card.Header>
 
-				<Card.Body>
-					<FormUsuarioDadosPessoais
-						obj={usuario}
-						onChange={handleChangeUsuario}
-					/>
+				<form>
+					<Card.Body>
+						<FormUsuarioDadosPessoais
+							obj={usuario}
+							onChange={handleChangeUsuario}
+						/>
 
-					<hr/>
+						<hr/>
 
-					<FormUsuarioSenha
-						obj={senha}
-						onChange={handleChangeSenha}
-					/>
+						<FormUsuarioSenha
+							obj={senha}
+							onChange={handleChangeSenha}
+						/>
 
-					<hr/>
+						<hr/>
 
-					<FormTelefone
-						obj={telefone}
-						onChange={handleChangeTelefone}
-					/>
+						<FormTelefone
+							obj={telefone}
+							onChange={handleChangeTelefone}
+						/>
 
-					<hr/>
+						<hr/>
 
-					<FormEndereco
-						obj={endereco}
-						onChange={handleChangeEndereco}
-					/>
-				</Card.Body>
+						<FormEndereco
+							obj={endereco}
+							onChange={handleChangeEndereco}
+						/>
+					</Card.Body>
 
-				<Card.Footer className={'bg-transparent'}>
-					<div className="d-sm-flex justify-content-sm-between align-items-sm-center">
-						<div>
-							<Button
-								className={'w-100 my-1 my-sm-0'}
-								icon={<i className="bi bi-person-add"></i>}
-								text={'Cadastrar'}
-								variant={'primary'}
-								onClick={handleSubmit}
-							/>
+					<Card.Footer className={'bg-transparent'}>
+						<div className="d-sm-flex justify-content-sm-between align-items-sm-center">
+							<div>
+								<Button
+									type={'submit'}
+									className={'w-100 my-1 my-sm-0'}
+									icon={<i className="bi bi-person-add"></i>}
+									text={'Cadastrar'}
+									variant={'dark'}
+									onClick={handleSubmit}
+								/>
+							</div>
+
+							<div>
+								<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
+																				className={'link-underline link-underline-opacity-0'}>Faça
+									o login</Link>.</p>
+							</div>
 						</div>
-
-						<div>
-							<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
-																			className={'link-underline link-underline-opacity-0'}>Faça
-								o login</Link>.</p>
-						</div>
-					</div>
-				</Card.Footer>
+					</Card.Footer>
+				</form>
 			</Card>
 		</>
 	)
 }
 
-export default CadastroUsuario;
+export default CadastroUsuario

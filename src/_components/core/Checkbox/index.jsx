@@ -7,9 +7,11 @@ const Checkbox = ({id, name, value, onChange}) => {
 				type={'checkbox'}
 				className={'form-check-input'}
 				value={value}
-				onChange={onChange}/>
+				checked={value}
+				onChange={onChange}
+			/>
 		</>
-	);
-};
+	)
+}
 
-export default Checkbox;
+export default Checkbox
