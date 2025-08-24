@@ -2,7 +2,11 @@ import ApiService from '@/_services/api-service'
 
 export default class ClienteService extends ApiService {
 	constructor() {
-		super('/cliente')
+		super('/clientes')
+	}
+
+	cadastrar(cliente) {
+		return this.post('', cliente)
 	}
 
 	consultar(filtro) {

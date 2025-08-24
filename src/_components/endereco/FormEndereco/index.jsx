@@ -4,6 +4,18 @@ import Input from '@/_components/core/Input'
 import Label from '@/_components/core/Label'
 import Select from '@/_components/core/Select'
 
+const tiposLogradouro = [
+	{value: 'Rua', text: 'Rua'},
+	{value: 'Avenida', text: 'Avenida'},
+	{value: 'Estrada', text: 'Estrada'},
+	{value: 'Viela', text: 'Viela'},
+]
+
+const tiposResidencia = [
+	{value: 'Casa', text: 'Casa'},
+	{value: 'Apartamento', text: 'Apartamento'},
+]
+
 const FormEndereco = ({obj, onChange}) => {
 	return (
 		<>
@@ -61,7 +73,7 @@ const FormEndereco = ({obj, onChange}) => {
 						name={'tipoLogradouro.tipo'}
 						value={obj.tipoLogradouro.tipo}
 						onChange={onChange}
-						options={[]}
+						options={tiposLogradouro}
 					/>
 				</FormGroup>
 
@@ -85,7 +97,7 @@ const FormEndereco = ({obj, onChange}) => {
 						name={'tipoResidencia.tipo'}
 						value={obj.tipoResidencia.tipo}
 						onChange={onChange}
-						options={[]}
+						options={tiposResidencia}
 					/>
 				</FormGroup>
 

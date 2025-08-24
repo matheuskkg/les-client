@@ -4,6 +4,12 @@ import Input from '@/_components/core/Input'
 import Label from '@/_components/core/Label'
 import Select from '@/_components/core/Select'
 
+const generoOptions = [
+	{value: 'Masculino', text: 'Masculino'},
+	{value: 'Feminino', text: 'Feminino'},
+	{value: 'Outro', text: 'Outro'},
+]
+
 const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 	return (
 		<>
@@ -26,7 +32,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 						name={'genero'}
 						value={obj.genero}
 						onChange={onChange}
-						options={[]}
+						options={generoOptions}
 					/>
 				</FormGroup>
 
@@ -66,7 +72,7 @@ const FormUsuarioDadosPessoais = ({obj, onChange}) => {
 				</FormGroup>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default FormUsuarioDadosPessoais;
+export default FormUsuarioDadosPessoais

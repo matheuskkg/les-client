@@ -21,7 +21,7 @@ export default class ApiService {
 			response => response,
 			error => {
 				if (error?.response?.status === 401) {
-					if (typeof window !== 'undefined') {
+					if (typeof window !== 'undefined' && window.location.pathname !== '/auth/login') {
 						import('@/_utils/auth').then(m => {
 							m.clearToken()
 							window.location.href = '/auth/login'

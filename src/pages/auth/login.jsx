@@ -3,8 +3,12 @@ import Card from '@/_components/core/Card'
 import FormGroup from '@/_components/core/FormGroup'
 import Input from '@/_components/core/Input'
 import Label from '@/_components/core/Label'
+import AuthService from '@/_services/auth-service'
+import {useAuth} from '@/_utils/AuthContext'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 import {useState} from 'react'
+import {toast} from 'react-toastify'
 
 const Login = () => {
 	const [login, setLogin] = useState({
@@ -12,13 +16,38 @@ const Login = () => {
 		senha: '',
 	})
 
+	const service = new AuthService()
+	const {setAuthToken} = useAuth()
+	const router = useRouter()
+
 	function handleChange(e) {
 		const {name, value} = e.target
 		setLogin({...login, [name]: value})
 	}
 
-	function handleSubmit() {
+	async function handleSubmit(e) {
+		e.preventDefault()
 
+		if (!login.email) {
+			toast.error('Informe o e-mail.')
+			return
+		}
+
+		if (!login.senha) {
+			toast.error('Informe a senha.')
+			return
+		}
+
+		await service.login(login)
+			.then(response => {
+				const token = response.data.entidades[0].token
+
+				setAuthToken(token)
+				router.push('/')
+			})
+			.catch(error => {
+				error.response.data.mensagens.forEach(mensagem => toast.error(mensagem))
+			})
 	}
 
 	return (
@@ -28,48 +57,50 @@ const Login = () => {
 					<h3 className={'my-2'}>Login</h3>
 				</Card.Header>
 
-				<Card.Body>
-					<FormGroup className={'mb-3'}>
-						<Label htmlFor={'email'} label={'*E-mail'}/>
-						<Input
-							id={'email'}
-							name={'email'}
-							placeholder={'E-mail'}
-							value={login.email}
-							onChange={handleChange}
-						/>
-					</FormGroup>
+				<form onSubmit={handleSubmit}>
+					<Card.Body>
+						<FormGroup className={'mb-3'}>
+							<Label htmlFor={'email'} label={'*E-mail'}/>
+							<Input
+								id={'email'}
+								name={'email'}
+								placeholder={'E-mail'}
+								value={login.email}
+								onChange={handleChange}
+							/>
+						</FormGroup>
 
-					<FormGroup>
-						<Label htmlFor={'senha'} label={'*Senha'}/>
-						<Input
-							id={'senha'}
-							name={'senha'}
-							type={'password'}
-							placeholder={'Senha'}
-							value={login.senha}
-							onChange={handleChange}
-						/>
-					</FormGroup>
-				</Card.Body>
+						<FormGroup>
+							<Label htmlFor={'senha'} label={'*Senha'}/>
+							<Input
+								id={'senha'}
+								name={'senha'}
+								type={'password'}
+								placeholder={'Senha'}
+								value={login.senha}
+								onChange={handleChange}
+							/>
+						</FormGroup>
+					</Card.Body>
 
-				<Card.Footer className={'bg-transparent'}>
-					<div>
-						<Button
-							className={'w-100 my-1'}
-							icon={<i className="bi bi-box-arrow-in-right"></i>}
-							text={'Entrar'}
-							variant={'dark'}
-							onClick={handleSubmit}
-						/>
-					</div>
+					<Card.Footer className={'bg-transparent'}>
+						<div>
+							<Button
+								type={'submit'}
+								className={'w-100 my-1'}
+								icon={<i className="bi bi-box-arrow-in-right"></i>}
+								text={'Entrar'}
+								variant={'dark'}
+							/>
+						</div>
 
-					<div>
-						<p className={'m-0'}>Ainda não possui uma conta? <Link href={'/auth/cadastro'}
-																			   className={'link-underline link-underline-opacity-0'}>Cadastre-se</Link>.
-						</p>
-					</div>
-				</Card.Footer>
+						<div>
+							<p className={'m-0'}>Ainda não possui uma conta? <Link href={'/auth/cadastro'}
+																				   className={'link-underline link-underline-opacity-0'}>Cadastre-se</Link>.
+							</p>
+						</div>
+					</Card.Footer>
+				</form>
 			</Card>
 		</>
 	)

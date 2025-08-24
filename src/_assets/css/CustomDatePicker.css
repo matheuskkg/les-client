@@ -5,3 +5,9 @@
 .ant-picker-suffix {
     color: #000 !important;
 }
+
+.ant-picker-input input {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+}

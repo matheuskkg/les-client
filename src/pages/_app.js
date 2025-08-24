@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import '@/_assets/css/CustomDatePicker.css'
 import Navbar from '@/_components/core/Navbar'
-import { AuthProvider, useAuth } from '@/_utils/AuthContext'
-import { useRouter } from 'next/router'
+import {AuthProvider, useAuth} from '@/_utils/AuthContext'
+import {useRouter} from 'next/router'
+import {ToastContainer} from 'react-toastify'
 
 function Guard({Component, pageProps}) {
-	const { user, loading } = useAuth()
+	const {user, loading} = useAuth()
 	const router = useRouter()
 
 	if (typeof window !== 'undefined') {
@@ -21,7 +22,9 @@ function Guard({Component, pageProps}) {
 	}
 
 	if (loading) {
-		return <div className="d-flex justify-content-center align-items-center" style={{minHeight: '60vh'}}><div className="spinner-border text-dark" role="status"/></div>
+		return <div className="d-flex justify-content-center align-items-center" style={{minHeight: '60vh'}}>
+			<div className="spinner-border text-dark" role="status"/>
+		</div>
 	}
 
 	return <Component {...pageProps} />
@@ -33,11 +36,14 @@ export default function App({Component, pageProps}) {
 	}, [])
 
 	return (
-		<AuthProvider>
-			<Navbar />
-			<div className={'page-center bg-secondary-subtle'}>
-				<Guard Component={Component} pageProps={pageProps} />
-			</div>
-		</AuthProvider>
+		<>
+			<ToastContainer/>
+			<AuthProvider>
+				<Navbar/>
+				<div className={'page-center bg-secondary-subtle'}>
+					<Guard Component={Component} pageProps={pageProps}/>
+				</div>
+			</AuthProvider>
+		</>
 	)
 }

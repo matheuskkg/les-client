@@ -1,4 +1,8 @@
 const Select = ({className, id, name, value, onChange, options}) => {
+	const selectOptions = options.map((option) =>
+		<option key={option.value} value={option.value}>{option.text}</option>
+	)
+
 	return (
 		<>
 			<select
@@ -9,11 +13,10 @@ const Select = ({className, id, name, value, onChange, options}) => {
 				onChange={onChange}
 			>
 				<option value={''} disabled hidden>Selecione</option>
-
-
+				{selectOptions}
 			</select>
 		</>
-	);
-};
+	)
+}
 
-export default Select;
+export default Select

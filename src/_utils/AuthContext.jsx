@@ -1,3 +1,4 @@
+import {useRouter} from 'next/router'
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { getToken, setToken as storeToken, clearToken, getUserFromToken, isTokenExpired } from '@/_utils/auth'
 
@@ -14,6 +15,8 @@ export function AuthProvider({children}) {
 	const [token, setToken] = useState(null)
 	const [user, setUser] = useState(null)
 	const [loading, setLoading] = useState(true)
+
+	const router = useRouter()
 
 	useEffect(() => {
 		const existing = getToken()
@@ -40,6 +43,7 @@ export function AuthProvider({children}) {
 
 	const logout = useCallback(() => {
 		setAuthToken(null)
+		router.push('')
 	}, [setAuthToken])
 
 	return (

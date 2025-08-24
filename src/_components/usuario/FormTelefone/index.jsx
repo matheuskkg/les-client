@@ -3,6 +3,11 @@ import Input from '@/_components/core/Input'
 import Label from '@/_components/core/Label'
 import Select from '@/_components/core/Select'
 
+const tiposTelefone = [
+	{value: 'Pessoal', text: 'Pessoal'},
+	{value: 'Comercial', text: 'Comercial'},
+]
+
 const FormTelefone = ({obj, onChange}) => {
 	return (
 		<>
@@ -25,7 +30,7 @@ const FormTelefone = ({obj, onChange}) => {
 						name={'tipoTelefone.tipo'}
 						value={obj.tipoTelefone.tipo}
 						onChange={onChange}
-						options={[]}
+						options={tiposTelefone}
 					/>
 				</FormGroup>
 
