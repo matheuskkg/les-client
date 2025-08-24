@@ -1,7 +1,7 @@
 import FormCartao from '@/_components/cartao/FormCartao'
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
-import {defaultCartao} from '@/utils/DefaultValues'
+import {defaultCartao} from '@/_utils/DefaultValues'
 import {Modal} from 'antd'
 import {useRouter} from 'next/router'
 import {useState} from 'react'
@@ -119,5 +119,7 @@ const CadastroCartao = () => {
 		</>
 	)
 }
+
+CadastroCartao.auth = true
 
 export default CadastroCartao

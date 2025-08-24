@@ -1,7 +1,7 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormUsuarioSenha from '@/_components/usuario/FormUsuarioSenha'
-import {defaultSenha} from '@/utils/DefaultValues'
+import {defaultSenha} from '@/_utils/DefaultValues'
 import {useState} from 'react'
 
 const AlterarSenha = () => {
@@ -44,5 +44,7 @@ const AlterarSenha = () => {
 		</>
 	)
 }
+
+AlterarSenha.auth = true
 
 export default AlterarSenha

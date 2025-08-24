@@ -2,7 +2,7 @@ import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormTelefone from '@/_components/usuario/FormTelefone'
 import FormUsuarioDadosPessoais from '@/_components/usuario/FormUsuarioDadosPessoais'
-import {defaultDadosPessoais, defaultTelefone} from '@/utils/DefaultValues'
+import {defaultDadosPessoais, defaultTelefone} from '@/_utils/DefaultValues'
 import {useState} from 'react'
 
 const DadosPessoais = () => {
@@ -57,5 +57,7 @@ const DadosPessoais = () => {
 		</>
 	);
 };
+
+DadosPessoais.auth = true
 
 export default DadosPessoais;

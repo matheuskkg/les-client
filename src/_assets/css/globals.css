@@ -3,7 +3,7 @@ html, body, #__next {
 }
 
 .page-center {
-    min-height: 100vh;
+    min-height: calc(100vh - 4rem);
     display: flex;
     flex-direction: column;
     justify-content: center;

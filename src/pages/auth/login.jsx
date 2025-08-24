@@ -13,8 +13,8 @@ const Login = () => {
 	})
 
 	function handleChange(e) {
-		const {name, value} = e.target;
-		setLogin({...login, [name]: value});
+		const {name, value} = e.target
+		setLogin({...login, [name]: value})
 	}
 
 	function handleSubmit() {
@@ -72,7 +72,7 @@ const Login = () => {
 				</Card.Footer>
 			</Card>
 		</>
-	);
-};
+	)
+}
 
-export default Login;
+export default Login

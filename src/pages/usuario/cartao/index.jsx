@@ -225,4 +225,6 @@ const ConsultaCartoes = () => {
 	)
 }
 
+ConsultaCartoes.auth = true
+
 export default ConsultaCartoes

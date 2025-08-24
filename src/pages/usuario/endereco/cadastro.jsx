@@ -1,7 +1,7 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormEndereco from '@/_components/endereco/FormEndereco'
-import {defaultEndereco} from '@/utils/DefaultValues'
+import {defaultEndereco} from '@/_utils/DefaultValues'
 import {Modal} from 'antd'
 import {useRouter} from 'next/router'
 import {useState} from 'react'
@@ -101,5 +101,7 @@ const CadastroEndereco = () => {
 		</>
 	)
 }
+
+CadastroEndereco.auth = true
 
 export default CadastroEndereco

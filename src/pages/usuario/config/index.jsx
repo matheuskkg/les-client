@@ -14,4 +14,6 @@ const UsuarioPerfil = () => {
 	)
 }
 
+UsuarioPerfil.auth = true
+
 export default UsuarioPerfil
