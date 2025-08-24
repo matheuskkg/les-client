@@ -7,12 +7,15 @@ import FormUsuarioSenha from '@/_components/usuario/FormUsuarioSenha'
 import {defaultDadosPessoais, defaultEndereco, defaultSenha, defaultTelefone} from '@/utils/DefaultValues'
 import Link from 'next/link'
 import {useState} from 'react'
+import {useMedia} from 'use-media'
 
 const CadastroUsuario = () => {
 	const [usuario, setUsuario] = useState(defaultDadosPessoais)
 	const [senha, setSenha] = useState(defaultSenha)
 	const [telefone, setTelefone] = useState(defaultTelefone)
 	const [endereco, setEndereco] = useState(defaultEndereco)
+
+	const isWide = useMedia({minWidth: 576})
 
 	function handleChangeUsuario(e) {
 		const {name, value} = e.target
@@ -39,6 +42,25 @@ const CadastroUsuario = () => {
 		e.preventDefault()
 
 	}
+
+	const pLogin = (
+		<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
+														className={'link-underline link-underline-opacity-0'}>Faça o
+			login</Link>.</p>
+	)
+
+	const botaoCadastrar = (
+		<div>
+			<Button
+				type={'submit'}
+				className={'w-100 my-1 my-sm-0'}
+				icon={<i className="bi bi-person-add"></i>}
+				text={'Cadastrar'}
+				variant={'dark'}
+				onClick={handleSubmit}
+			/>
+		</div>
+	)
 
 	return (
 		<>
@@ -78,24 +100,19 @@ const CadastroUsuario = () => {
 
 					<Card.Footer className={'bg-transparent'}>
 						<div
-							className="d-flex justify-content-sm-between align-items-sm-center flex-column-reverse flex-sm-row"
+							className="d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row"
 						>
-							<p className={'m-0'}>Já possui uma conta? <Link href={'/auth/login'}
-																			className={'link-underline link-underline-opacity-0'}
-							>
-								Faça o login</Link>.
-							</p>
-
-							<div>
-								<Button
-									type={'submit'}
-									className={'w-100 my-1 my-sm-0'}
-									icon={<i className="bi bi-person-add"></i>}
-									text={'Cadastrar'}
-									variant={'dark'}
-									onClick={handleSubmit}
-								/>
-							</div>
+							{isWide ? (
+								<>
+									{pLogin}
+									{botaoCadastrar}
+								</>
+							) : (
+								<>
+									{botaoCadastrar}
+									{pLogin}
+								</>
+							)}
 						</div>
 					</Card.Footer>
 				</form>

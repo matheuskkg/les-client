@@ -1,25 +1,25 @@
+import FormCartao from '@/_components/cartao/FormCartao'
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
-import FormEndereco from '@/_components/endereco/FormEndereco'
 import {Modal} from 'antd'
 import Link from 'next/link'
 import {useEffect, useState} from 'react'
 
-const ConsultaEnderecos = () => {
+const ConsultaCartoes = () => {
 	const [isModalEditarOpen, setIsModalEditarOpen] = useState(false)
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
 
-	const [enderecoEditando, setEnderecoEditando] = useState({})
-	const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
+	const [cartaoEditando, setCartaoEditando] = useState({})
+	const [cartaoExcluindo, setCartaoExcluindo] = useState({})
 
-	function handleChangeEnderecoEditando(e) {
+	function handleChangeCartaoEditando(e) {
 		const {name, type, value, checked} = e.target
 		const inputValue = type === 'checkbox' ? checked : value
-		setEnderecoEditando({...enderecoEditando, [name]: inputValue})
+		setCartaoEditando({...cartaoEditando, [name]: inputValue})
 	}
 
-	function showModalEditar(endereco) {
-		setEnderecoEditando(endereco)
+	function showModalEditar(cartao) {
+		setCartaoEditando(cartao)
 		setIsModalEditarOpen(true)
 	}
 
@@ -27,13 +27,13 @@ const ConsultaEnderecos = () => {
 		setIsModalEditarOpen(false)
 	}
 
-	function handleEditarEndereco(e) {
+	function handleEditarCartao(e) {
 		e.preventDefault()
 
 	}
 
-	function showModalExcluir(endereco) {
-		setEnderecoExcluindo(endereco)
+	function showModalExcluir(cartao) {
+		setCartaoExcluindo(cartao)
 		setIsModalExcluirOpen(true)
 	}
 
@@ -41,102 +41,58 @@ const ConsultaEnderecos = () => {
 		setIsModalExcluirOpen(false)
 	}
 
-	function handleExcluirEndereco() {
+	function handleExcluirCartao() {
 
 	}
 
 	const [rows, setRows] = useState([])
 	useEffect(() => {
-		const enderecos = [
+		const cartoes = [
 			{
-				id: 1,
-				nomeIdentificador: 'nome1',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
+				bandeira: {
+					bandeira: 'Visa',
 				},
-				logradouro: 'abc',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
+				nomeTitular: 'c1',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
 			},
 			{
-				id: 2,
-				nomeIdentificador: 'nome2',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
+				bandeira: {
+					bandeira: 'Visa',
 				},
-				logradouro: 'jhg',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
+				nomeTitular: 'c2',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
 			},
 			{
-				id: 3,
-				nomeIdentificador: 'nome3',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
+				bandeira: {
+					bandeira: 'Visa',
 				},
-				logradouro: 'kfgkf',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
+				nomeTitular: 'c3',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: true,
 			},
 			{
-				id: 4,
-				nomeIdentificador: 'nome4',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
+				bandeira: {
+					bandeira: 'Visa',
 				},
-				logradouro: 'aewewewbc',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
+				nomeTitular: 'c4',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
 			},
 		]
 
-		const length = enderecos.length
-		const rows = enderecos.map((e, index) => {
-			const res = e.tipoLogradouro.tipo + ' ' + e.logradouro + ', ' + e.cidade + ' - ' + e.estado
+		const length = cartoes.length
+		const rows = cartoes.map((c, index) => {
+			const res = c.bandeira.bandeira + ' - ' + c.nomeTitular
 			const shouldReturnHr = index < length - 1
 
 			return (
-				<div key={e.id}>
+				<div key={c.id}>
 					<div className="d-flex justify-content-between align-items-center mx-2">
 						<p className="my-0">{res}</p>
 
@@ -145,13 +101,13 @@ const ConsultaEnderecos = () => {
 								className="me-1"
 								variant={'dark'}
 								icon={<i className="bi bi-pencil"></i>}
-								onClick={() => showModalEditar(e)}
+								onClick={() => showModalEditar(c)}
 							/>
 
 							<Button
 								variant={'dark'}
 								icon={<i className="bi bi-trash3"></i>}
-								onClick={() => showModalExcluir(e)}
+								onClick={() => showModalExcluir(c)}
 							/>
 						</div>
 					</div>
@@ -168,18 +124,18 @@ const ConsultaEnderecos = () => {
 
 	return (
 		<>
-			<div className="container">
-				<div className="col-sm-9 col-12 m-auto">
+			<div className={'container-xxl'}>
+				<div className={'col-md-9 col-12 m-auto'}>
 					<Card>
 						<Card.Header className={'bg-transparent'}>
-							<div className="d-flex justify-content-between align-items-center">
-								<h3 className={'m-0'}>Endereços</h3>
+							<div className={'d-flex justify-content-between align-items-center'}>
+								<h3 className={'m-0'}>Cartões</h3>
 
 								<Link
-									href={'/usuario/endereco/cadastro'}
+									href={'/usuario/cartao/cadastro'}
 									className={'btn btn-sm btn-dark'}
 								>
-									Cadastrar endereço
+									Cadastrar cartão
 								</Link>
 							</div>
 						</Card.Header>
@@ -198,7 +154,7 @@ const ConsultaEnderecos = () => {
 			{isModalEditarOpen && (
 				<Modal
 					centered={true}
-					title={<h3>Alterar endereço</h3>}
+					title={<h3>Alterar cartão</h3>}
 					open={isModalEditarOpen}
 					onCancel={closeModalEditar}
 					footer={null}
@@ -209,9 +165,9 @@ const ConsultaEnderecos = () => {
 					}}
 				>
 					<form>
-						<FormEndereco
-							obj={enderecoEditando}
-							onChange={handleChangeEnderecoEditando}
+						<FormCartao
+							obj={cartaoEditando}
+							onChange={handleChangeCartaoEditando}
 						/>
 
 						<div>
@@ -221,7 +177,7 @@ const ConsultaEnderecos = () => {
 								icon={<i className="bi bi-check-lg"></i>}
 								text={'Confirmar'}
 								variant={'dark'}
-								onClick={handleEditarEndereco}
+								onClick={handleEditarCartao}
 							/>
 
 							<Button
@@ -239,7 +195,7 @@ const ConsultaEnderecos = () => {
 			{isModalExcluirOpen && (
 				<Modal
 					centered={true}
-					title={<h3>Excluir endereço ({enderecoExcluindo.nomeIdentificador})</h3>}
+					title={<h3>Excluir cartão</h3>}
 					open={isModalExcluirOpen}
 					onCancel={closeModalExcluir}
 					footer={
@@ -257,16 +213,16 @@ const ConsultaEnderecos = () => {
 								icon={<i className="bi bi-check-lg"></i>}
 								text={'Excluir'}
 								variant={'dark'}
-								onClick={handleExcluirEndereco}
+								onClick={handleExcluirCartao}
 							/>
 						</div>
 					}
 				>
-					<p>Tem certeza que deseja excluir esse endereço?</p>
+					<p>Tem certeza que deseja excluir esse cartão?</p>
 				</Modal>
 			)}
 		</>
 	)
 }
 
-export default ConsultaEnderecos
+export default ConsultaCartoes

@@ -46,3 +46,15 @@ export function defaultEndereco() {
 		entrega: false,
 	}
 }
+
+export function defaultCartao() {
+	return {
+		bandeira: {
+			bandeira: '',
+		},
+		nomeTitular: '',
+		numero: '',
+		codigoSeguranca: '',
+		preferencial: false,
+	}
+}

@@ -8,6 +8,8 @@ const UsuarioPerfil = () => {
 			<Link href={'/usuario/config/dados-pessoais'}>Alterar dados pessoais</Link>
 
 			<Link href={'/usuario/endereco'}>Endereços</Link>
+
+			<Link href={'/usuario/cartao'}>Cartões</Link>
 		</>
 	)
 }
