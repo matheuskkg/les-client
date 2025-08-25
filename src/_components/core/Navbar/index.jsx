@@ -13,7 +13,7 @@ const NavbarLink = ({href, children, className = ''}) => {
 
 const Navbar = () => {
 	const { user, logout } = useAuth()
-	const username = user?.name || user?.email || 'Usuário'
+	const username = user?.nome || user?.email || 'Usuário'
 
 	return (
 		<nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark" style={{height: 4 + 'rem'}}>
@@ -28,6 +28,17 @@ const Navbar = () => {
 						<li className="nav-item">
 							<NavbarLink href="/">Home</NavbarLink>
 						</li>
+						{user && (
+							<li className="nav-item dropdown">
+								<a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
+								   role="button" data-bs-toggle="dropdown">
+									<span className="d-none d-sm-inline">Admin</span>
+								</a>
+								<ul className="dropdown-menu dropdown-menu-start">
+									<li><Link className="dropdown-item" href="/admin/clientes">Consultar clientes</Link></li>
+								</ul>
+							</li>
+						)}
 					</ul>
 
 					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -40,12 +51,11 @@ const Navbar = () => {
 						{user && (
 							<li className="nav-item dropdown">
 								<a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
-								   id="userDropdown"
 								   role="button" data-bs-toggle="dropdown">
 									<i className="bi bi-person-circle fs-5"></i>
 									<span className="d-none d-sm-inline">{username}</span>
 								</a>
-								<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+								<ul className="dropdown-menu dropdown-menu-end">
 									<li><Link className="dropdown-item" href="/usuario/config">Perfil</Link></li>
 									<li><hr className="dropdown-divider"/></li>
 									<li>

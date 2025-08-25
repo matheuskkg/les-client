@@ -3,6 +3,8 @@ import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import ClienteService from '@/_services/cliente-service'
 import {useEffect, useState} from 'react'
+import styles from '@/_assets/css/ConsultarClientes.module.css'
+import {toast} from 'react-toastify'
 
 const ConsultarClientes = () => {
 	const [clientes, setClientes] = useState([])
@@ -23,7 +25,12 @@ const ConsultarClientes = () => {
 	function consultar() {
 		service.consultar(filtro)
 			.then(response => {
-				setClientes(response.data)
+				if (response.data.entidades.length === 0) {
+					toast.warning('Nenhum cliente encontrado.')
+					return
+				}
+
+				setClientes(response.data.entidades)
 			})
 			.catch(error => console.log(error))
 	}
@@ -62,9 +69,35 @@ const ConsultarClientes = () => {
 				</Card.Body>
 			</Card>
 
-			<Card className={'mt-5'}>
-				<Card.Body>
+			<Card className={'col-12 mt-5 d-flex flex-row flex-xxl-column'}>
+				<Card.Header className={'bg-dark text-bg-dark'}>
+					<div className={`${styles.header} sticky-top my-2`}>
+						<span>Nome</span>
+						<span>E-mail</span>
+						<span>CPF</span>
+						<span>Telefone</span>
+						<span>Placeholder</span>
+					</div>
+				</Card.Header>
 
+				<Card.Body>
+					<div style={{height: 400, overflowY: 'auto'}}>
+						<div className={'w-100'}>
+							{clientes.map(c => (
+								<>
+									<div key={c.id} className={`d-flex justify-content-start my-2 ${styles.clienteRow}`}>
+										<span>{c.nome}</span>
+										<span>{c.email}</span>
+										<span>{c.cpf}</span>
+										<span>{c.telefone.ddd} - {c.telefone.numero}</span>
+										<span>Placeholder</span>
+									</div>
+
+									<hr/>
+								</>
+							))}
+						</div>
+					</div>
 				</Card.Body>
 			</Card>
 		</>

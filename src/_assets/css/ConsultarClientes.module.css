@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+}
+
+.header span {
+    flex: 1;
+    font-size: 1.2rem;
+}
+
+.clienteRow span {
+    flex: 1;
+}
