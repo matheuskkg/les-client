@@ -120,6 +120,6 @@ const CadastroCartao = () => {
 	)
 }
 
-CadastroCartao.auth = true
+//CadastroCartao.auth = true
 
 export default CadastroCartao

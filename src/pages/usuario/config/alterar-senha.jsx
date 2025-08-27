@@ -45,6 +45,6 @@ const AlterarSenha = () => {
 	)
 }
 
-AlterarSenha.auth = true
+//AlterarSenha.auth = true
 
 export default AlterarSenha

@@ -43,7 +43,7 @@ export function AuthProvider({children}) {
 
 	const logout = useCallback(() => {
 		setAuthToken(null)
-		router.push('')
+		router.push('/')
 	}, [setAuthToken])
 
 	return (

@@ -269,6 +269,6 @@ const ConsultaEnderecos = () => {
 	)
 }
 
-ConsultaEnderecos.auth = true
+//ConsultaEnderecos.auth = true
 
 export default ConsultaEnderecos

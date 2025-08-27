@@ -102,6 +102,6 @@ const CadastroEndereco = () => {
 	)
 }
 
-CadastroEndereco.auth = true
+//CadastroEndereco.auth = true
 
 export default CadastroEndereco

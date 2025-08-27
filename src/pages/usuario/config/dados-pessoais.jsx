@@ -58,6 +58,6 @@ const DadosPessoais = () => {
 	);
 };
 
-DadosPessoais.auth = true
+//DadosPessoais.auth = true
 
 export default DadosPessoais;
