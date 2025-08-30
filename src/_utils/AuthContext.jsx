@@ -1,14 +1,17 @@
 import {useRouter} from 'next/router'
-import { createContext, useContext, useEffect, useState, useCallback } from 'react'
-import { getToken, setToken as storeToken, clearToken, getUserFromToken, isTokenExpired } from '@/_utils/auth'
+import {createContext, useContext, useEffect, useState, useCallback} from 'react'
+import {getToken, setToken as storeToken, clearToken, getUserFromToken, isTokenExpired} from '@/_utils/auth'
 
 const AuthContext = createContext({
 	user: null,
 	token: null,
 	loading: true,
-	login: async (_credentials) => {},
-	logout: () => {},
-	setAuthToken: () => {}
+	login: async (_credentials) => {
+	},
+	logout: () => {
+	},
+	setAuthToken: () => {
+	},
 })
 
 export function AuthProvider({children}) {

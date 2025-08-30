@@ -7,8 +7,7 @@ const CardProduto = ({className = '', produto}) => {
 			<Card className={'col-12 col-sm-6 col-md-4 col-lg-3'}>
 				<Card.Body>
 					<div className={'text-center'}>
-					<img src={produto.img} alt={'Placeholder'} className={'img-fluid'} />
-
+						<img src={produto.img} alt={'Placeholder'} className={'img-fluid'}/>
 					</div>
 
 					<hr/>
@@ -20,7 +19,7 @@ const CardProduto = ({className = '', produto}) => {
 
 					<hr/>
 
-					<ContadorProduto produto={produto} />
+					<ContadorProduto produto={produto}/>
 				</Card.Body>
 			</Card>
 		</>

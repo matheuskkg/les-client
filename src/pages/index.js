@@ -1,6 +1,6 @@
 import Card from '@/_components/core/Card'
 import CardProduto from '@/_components/produto/CardProduto'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import placeholderImg from '@/_assets/images/placeholder.png'
 
 export default function Home() {
