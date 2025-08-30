@@ -1,5 +1,6 @@
 import Button from '@/_components/core/Button'
 import MaskedInput from '@/_components/core/MaskedInput'
+import {useCarrinho} from '@/_utils/CarrinhoContext'
 import {useState} from 'react'
 
 const ContadorProduto = ({produto}) => {
@@ -7,13 +8,26 @@ const ContadorProduto = ({produto}) => {
 		produto,
 		quantidade: '',
 	})
+	const {adicionar, remover} = useCarrinho()
+
+	function atualizarCarrinho(next) {
+		if (next.quantidade === '' || Number(next.quantidade) <= 0) {
+			remover(next)
+		} else {
+			adicionar(next)
+		}
+	}
 
 	function handleChange(e) {
 		const {name, value} = e.target
-		setContagemProduto(prev => ({
-			...prev,
-			[name]: value === '' ? '' : Number(value),
-		}))
+		setContagemProduto(prev => {
+			const next = {
+				...prev,
+				[name]: value === '' ? '' : Number(value),
+			}
+			atualizarCarrinho(next)
+			return next
+		})
 	}
 
 	function handleMinus() {

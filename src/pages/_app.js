@@ -1,3 +1,4 @@
+import {CarrinhoProvider} from '@/_utils/CarrinhoContext'
 import {useEffect} from 'react'
 import '@/_assets/css/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -39,10 +40,12 @@ export default function App({Component, pageProps}) {
 		<>
 			<ToastContainer/>
 			<AuthProvider>
-				<Navbar/>
-				<div className={'page-center bg-secondary-subtle'}>
-					<Guard Component={Component} pageProps={pageProps}/>
-				</div>
+				<CarrinhoProvider>
+					<Navbar/>
+					<div className={'page-center py-2 py-md-0 bg-secondary-subtle'}>
+						<Guard Component={Component} pageProps={pageProps}/>
+					</div>
+				</CarrinhoProvider>
 			</AuthProvider>
 		</>
 	)
