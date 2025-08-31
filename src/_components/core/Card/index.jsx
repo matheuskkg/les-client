@@ -10,10 +10,10 @@ const Card = ({children, className = '', style}) => {
 	)
 }
 
-const Header = ({children, className = ''}) => {
+const Header = ({children, className = '', style}) => {
 	return (
 		<>
-			<div className={`card-header ${className}`}>
+			<div className={`card-header ${className}`} style={style}>
 				{children}
 			</div>
 		</>
@@ -21,10 +21,10 @@ const Header = ({children, className = ''}) => {
 }
 Card.Header = Header
 
-const Body = ({children, className = ''}) => {
+const Body = ({children, className = '', style}) => {
 	return (
 		<>
-			<div className={`card-body ${className}`}>
+			<div className={`card-body ${className}`} style={style}>
 				{children}
 			</div>
 		</>
@@ -32,10 +32,10 @@ const Body = ({children, className = ''}) => {
 }
 Card.Body = Body
 
-const Footer = ({children, className = ''}) => {
+const Footer = ({children, className = '', style}) => {
 	return (
 		<>
-			<div className={`card-footer ${className}`}>
+			<div className={`card-footer ${className}`} style={style}>
 				{children}
 			</div>
 		</>

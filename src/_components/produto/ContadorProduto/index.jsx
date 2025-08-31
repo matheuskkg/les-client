@@ -3,12 +3,13 @@ import MaskedInput from '@/_components/core/MaskedInput'
 import {useCarrinho} from '@/_utils/CarrinhoContext'
 import {useState} from 'react'
 
-const ContadorProduto = ({produto}) => {
-	const [contagemProduto, setContagemProduto] = useState({
+const ContadorProduto = ({produto, min = 0}) => {
+	const {adicionar, remover, buscarItemPorProduto} = useCarrinho()
+	const itemExistente = buscarItemPorProduto(produto)
+	const [contagemProduto, setContagemProduto] = useState(itemExistente || {
 		produto,
 		quantidade: '',
 	})
-	const {adicionar, remover} = useCarrinho()
 
 	function atualizarCarrinho(next) {
 		if (next.quantidade === '' || Number(next.quantidade) <= 0) {
@@ -20,6 +21,11 @@ const ContadorProduto = ({produto}) => {
 
 	function handleChange(e) {
 		const {name, value} = e.target
+
+		if (value < min) {
+			return
+		}
+
 		setContagemProduto(prev => {
 			const next = {
 				...prev,
@@ -53,7 +59,7 @@ const ContadorProduto = ({produto}) => {
 					variant="dark"
 					icon={<i className="bi bi-dash-lg"></i>}
 					onClick={handleMinus}
-					disabled={contagemProduto.quantidade === ''}
+					disabled={contagemProduto.quantidade === '' || contagemProduto.quantidade === min}
 				/>
 
 				<div className={'col-3 mx-2'}>

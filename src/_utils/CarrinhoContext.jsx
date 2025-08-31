@@ -37,12 +37,12 @@ export const CarrinhoProvider = ({children}) => {
 		setItens([])
 	}
 
-	const value = {
-		itens, adicionar, remover, limpar,
+	function buscarItemPorProduto(produto) {
+		return itens.find(i => i.produto.id === produto.id)
 	}
 
 	return (
-		<CarrinhoContext.Provider value={{itens, adicionar, remover, limpar}}>
+		<CarrinhoContext.Provider value={{itens, adicionar, remover, limpar, buscarItemPorProduto}}>
 			{children}
 		</CarrinhoContext.Provider>
 	)
