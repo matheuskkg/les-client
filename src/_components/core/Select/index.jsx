@@ -1,6 +1,15 @@
-const Select = ({className, id, name, value, onChange, options}) => {
+const Select = (
+	{
+		className = '',
+		id,
+		name,
+		value,
+		onChange,
+		options = [],
+	},
+) => {
 	const selectOptions = options.map((option) =>
-		<option key={option.value} value={option.value}>{option.text}</option>
+		<option key={option.value} value={option.value}>{option.text}</option>,
 	)
 
 	return (

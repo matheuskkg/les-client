@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import { useAuth } from '@/_utils/AuthContext'
+import {useAuth} from '@/_utils/AuthContext'
 
 const NavbarLink = ({href, children, className = ''}) => {
 	const {pathname} = useRouter()
@@ -12,7 +12,7 @@ const NavbarLink = ({href, children, className = ''}) => {
 }
 
 const Navbar = () => {
-	const { user, logout } = useAuth()
+	const {user, logout} = useAuth()
 	const username = user?.nome || user?.email || 'Usuário'
 
 	return (
@@ -24,7 +24,7 @@ const Navbar = () => {
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
+					<ul className="navbar-nav me-auto mb-0">
 						<li className="nav-item">
 							<NavbarLink href="/">Home</NavbarLink>
 						</li>
@@ -35,15 +35,17 @@ const Navbar = () => {
 									<span className="d-none d-sm-inline">Admin</span>
 								</a>
 								<ul className="dropdown-menu dropdown-menu-start">
-									<li><Link className="dropdown-item" href="/admin/clientes">Consultar clientes</Link></li>
+									<li><Link className="dropdown-item" href="/admin/clientes">Consultar clientes</Link>
+									</li>
 								</ul>
 							</li>
 						)}
 					</ul>
 
-					<ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+					<ul className="navbar-nav ms-auto mb-0">
+						<li className={'nav-item'}><NavbarLink href={'/carrinho'}>Carrinho</NavbarLink></li>
 						{!user && (
-							<li className="nav-item d-flex gap-2">
+							<li className="nav-item d-flex align-items-center gap-2 mt-2 mt-sm-0">
 								<Link href="/auth/login" className="btn btn-outline-light btn-sm">Entrar</Link>
 								<Link href="/auth/cadastro" className="btn btn-light btn-sm">Cadastrar</Link>
 							</li>
@@ -57,7 +59,9 @@ const Navbar = () => {
 								</a>
 								<ul className="dropdown-menu dropdown-menu-end">
 									<li><Link className="dropdown-item" href="/usuario/config">Perfil</Link></li>
-									<li><hr className="dropdown-divider"/></li>
+									<li>
+										<hr className="dropdown-divider"/>
+									</li>
 									<li>
 										<button className="dropdown-item" type="button" onClick={logout}>Sair</button>
 									</li>

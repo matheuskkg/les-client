@@ -3,7 +3,6 @@ import Card from '@/_components/core/Card'
 import FormGroup from '@/_components/core/FormGroup'
 import Input from '@/_components/core/Input'
 import Label from '@/_components/core/Label'
-import SelectMultiple from '@/_components/core/SelectMultiple'
 import AuthService from '@/_services/auth-service'
 import {useAuth} from '@/_utils/AuthContext'
 import Link from 'next/link'
@@ -80,21 +79,6 @@ const Login = () => {
 								placeholder={'Senha'}
 								value={login.senha}
 								onChange={handleChange}
-							/>
-						</FormGroup>
-
-						<FormGroup>
-							<Label htmlFor={'test'} label={'*Test'}/>
-							<SelectMultiple
-								id={'test'}
-								name={'test'}
-								placeholder={'Selecione'}
-								className={''}
-								options={[
-									{id: 1, descricao: 'test 1'},
-									{id: 2, descricao: 'test 2'},
-									{id: 3, descricao: 'test 3'},
-								]}
 							/>
 						</FormGroup>
 					</Card.Body>
