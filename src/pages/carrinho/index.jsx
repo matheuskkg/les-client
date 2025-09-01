@@ -14,6 +14,9 @@ const Carrinho = ({}) => {
 	const {itens, remover} = useCarrinho()
 	const hasItens = itens.length > 0
 	const hasCupons = true
+	const precoTotalPedido = itens.reduce((precoTotal, item) => {
+		return precoTotal + item.produto.preco * item.quantidade
+	}, 0)
 	const router = useRouter()
 
 	function removerItem(item) {
@@ -73,7 +76,7 @@ const Carrinho = ({}) => {
 
 					<Card className={'col-12 col-lg-9 col-xxl-6 mt-5'}>
 						<Card.Header className={'bg-dark text-bg-dark sticky-top z-1'}>
-							<h3 className={'my-2'}><i className="bi bi-cart-check"></i> Finalizar compra</h3>
+							<h3 className={'my-2'}><i className="bi bi-cart-check"></i> Finalizar pedido</h3>
 						</Card.Header>
 
 						<Card.Body>
@@ -85,7 +88,6 @@ const Carrinho = ({}) => {
 									name={'endereco'}
 									icon={<i className="bi bi-plus-lg"></i>}
 									value={''}
-									onClick={() => router.push('/usuario/endereco/cadastro')}
 								/>
 							</FormGroup>
 
@@ -101,7 +103,6 @@ const Carrinho = ({}) => {
 									id={'cartoes'}
 									name={'cartoes'}
 									icon={<i className="bi bi-plus-lg"></i>}
-									onClick={() => router.push('/usuario/cartao/cadastro')}
 									options={[
 										{value: 1, text: 'Cartão 1'},
 										{value: 2, text: 'Cartão 2'},
@@ -129,7 +130,7 @@ const Carrinho = ({}) => {
 								</FormGroup>
 							}
 
-							<h5 className={'m-0 fw-semibold'}>Total da compra: R$ 0.00,00</h5>
+							<h5 className={'m-0 fw-semibold'}>Total da compra: {precoTotalPedido}</h5>
 						</Card.Body>
 
 						<Card.Footer className={'bg-white'}>
@@ -137,7 +138,8 @@ const Carrinho = ({}) => {
 								<Button
 									variant={'dark'}
 									icon={<i className="bi bi-check-lg"></i>}
-									text={'Finalizar compra'}
+									text={'Finalizar pedido'}
+									onClick={() => router.push('/carrinho/confirmar-pedido')}
 								/>
 							</div>
 						</Card.Footer>
