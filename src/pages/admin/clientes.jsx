@@ -3,7 +3,7 @@ import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import ClienteService from '@/_services/cliente-service'
 import {useEffect, useState} from 'react'
-import styles from '@/_assets/css/ConsultarClientes.module.css'
+import styles from '@/_assets/css/DivTable.module.css'
 import {toast} from 'react-toastify'
 
 const ConsultarClientes = () => {
@@ -69,9 +69,9 @@ const ConsultarClientes = () => {
 				</Card.Body>
 			</Card>
 
-			<Card className={'col-12 mt-5 d-flex flex-row flex-xxl-column'}>
+			<Card className={'col-12 mt-5'}>
 				<Card.Header className={'bg-dark text-bg-dark'}>
-					<div className={`${styles.header} sticky-top my-2`}>
+					<div className={`${styles.header} my-2`}>
 						<span>Nome</span>
 						<span>E-mail</span>
 						<span>CPF</span>
@@ -85,7 +85,7 @@ const ConsultarClientes = () => {
 						<div className={'w-100'}>
 							{clientes.map(c => (
 								<>
-									<div key={c.id} className={`d-flex justify-content-start my-2 ${styles.clienteRow}`}>
+									<div key={c.id} className={`d-flex justify-content-start my-2 ${styles.row}`}>
 										<span>{c.nome}</span>
 										<span>{c.email}</span>
 										<span>{c.cpf}</span>

@@ -16,7 +16,7 @@ const Navbar = () => {
 	const username = user?.nome || user?.email || 'Usuário'
 
 	return (
-		<nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark" style={{height: 4 + 'rem'}}>
+		<nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
 			<div className="container-fluid">
 				<span className="navbar-brand">E-Livros</span>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -28,34 +28,34 @@ const Navbar = () => {
 						<li className="nav-item">
 							<NavbarLink href="/">Home</NavbarLink>
 						</li>
-						{user && (
+						{/*{user && (*/}
 							<li className="nav-item dropdown">
 								<a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
 								   role="button" data-bs-toggle="dropdown">
 									<span className="d-none d-sm-inline">Admin</span>
 								</a>
 								<ul className="dropdown-menu dropdown-menu-start">
-									<li><Link className="dropdown-item" href="/admin/clientes">Consultar clientes</Link>
-									</li>
+									<li><Link className="dropdown-item" href="/admin/clientes">Consultar clientes</Link></li>
+									<li><Link className={'dropdown-item'} href={'/admin/pedidos'}>Consultar pedidos</Link></li>
 								</ul>
 							</li>
-						)}
+						{/*)}*/}
 					</ul>
 
 					<ul className="navbar-nav ms-auto mb-0">
-						<li className={'nav-item'}><NavbarLink href={'/carrinho'}>Carrinho</NavbarLink></li>
+						<li className={'nav-item d-flex align-items-center'}><NavbarLink href={'/carrinho'}>Carrinho</NavbarLink></li>
 						{!user && (
 							<li className="nav-item d-flex align-items-center gap-2 mt-2 mt-sm-0">
 								<Link href="/auth/login" className="btn btn-outline-light btn-sm">Entrar</Link>
 								<Link href="/auth/cadastro" className="btn btn-light btn-sm">Cadastrar</Link>
 							</li>
 						)}
-						{user && (
+						{/*{user && (*/}
 							<li className="nav-item dropdown">
 								<a className="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
 								   role="button" data-bs-toggle="dropdown">
 									<i className="bi bi-person-circle fs-5"></i>
-									<span className="d-none d-sm-inline">{username}</span>
+									<span className="d-inline">{username}</span>
 								</a>
 								<ul className="dropdown-menu dropdown-menu-end">
 									<li><Link className="dropdown-item" href="/usuario/config">Perfil</Link></li>
@@ -67,7 +67,7 @@ const Navbar = () => {
 									</li>
 								</ul>
 							</li>
-						)}
+						{/*)}*/}
 					</ul>
 				</div>
 			</div>

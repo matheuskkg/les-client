@@ -204,7 +204,7 @@ const Carrinho = ({}) => {
 					</Card>
 
 					<Card className={'col-12 col-lg-9 col-xxl-6 mt-5'}>
-						<Card.Header className={'bg-dark text-bg-dark sticky-top z-1'}>
+						<Card.Header className={'bg-dark text-bg-dark'}>
 							<h3 className={'my-2'}><i className="bi bi-cart-check"></i> Finalizar pedido</h3>
 						</Card.Header>
 
