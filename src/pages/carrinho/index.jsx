@@ -20,6 +20,12 @@ const Carrinho = ({}) => {
 		return precoTotal + item.produto.preco * item.quantidade
 	}, 0)
 
+	const [enderecos, setEnderecos] = useState([])
+	const [enderecoSelecionado, setEnderecoSelecionado] = useState('')
+	function handleChangeEndereco(e) {
+		setEnderecoSelecionado(enderecos.find(end => end.id === e.target.value))
+	}
+
 	const [cartoes, setCartoes] = useState([])
 	const [cartoesSelecionados, setCartoesSelecionados] = useState([])
 
@@ -34,7 +40,16 @@ const Carrinho = ({}) => {
 
 	function handleChangeCupons(e) {
 		const selectedIds = Array.from(e.target.selectedOptions, o => Number(o.value))
-		setCuponsSelecionados(cupons.filter(c => selectedIds.includes(c.id)))
+		let selected = cupons.filter(c => selectedIds.includes(c.id))
+
+		const cuponsPromocionais = selected.filter(c => c.tipoCupom.tipo === 'Promocional')
+		if (cuponsPromocionais.length > 1) {
+			selected = selected.filter(c =>
+				c.tipoCupom.tipo !== 'Promocional' || (c.tipoCupom.tipo === 'Promocional' && !cuponsSelecionados.find(cc => cc.id === c.id)),
+			)
+		}
+
+		setCuponsSelecionados(selected)
 	}
 
 	function removerItem(item) {
@@ -43,10 +58,55 @@ const Carrinho = ({}) => {
 
 	useEffect(() => {
 		//TODO api call
+		//filtrar enderecos por entrega === true na chamada
+		setEnderecos([
+			{
+				id: 1,
+				nomeIdentificador: 'nome1',
+				pais: 'pais',
+				estado: 'estado 1',
+				cidade: 'cidade 1',
+				tipoLogradouro: {
+					tipo: 'Rua',
+				},
+				logradouro: 'abc',
+				tipoResidencia: {
+					tipo: 'Casa',
+				},
+				numero: '123A',
+				bairro: 'ju',
+				cep: '123412412',
+				observacao: 'asdaw',
+				cobranca: true,
+				entrega: true,
+			},
+			{
+				id: 2,
+				nomeIdentificador: 'nome2',
+				pais: 'pais',
+				estado: 'estado 2',
+				cidade: 'cidade 2',
+				tipoLogradouro: {
+					tipo: 'Rua',
+				},
+				logradouro: 'jhg',
+				tipoResidencia: {
+					tipo: 'Casa',
+				},
+				numero: '123A',
+				bairro: 'ju',
+				cep: '123412412',
+				observacao: 'asdaw',
+				cobranca: true,
+				entrega: true,
+			},
+		])
 		setCupons([
-			{id: 1, codigo: 'CUPOM-1', valor: 20.00},
-			{id: 2, codigo: 'CUPOM-2', valor: 2.50},
-			{id: 3, codigo: 'CUPOM-3', valor: 14.75},
+			{id: 1, codigo: 'CUPOM-1', valor: 20.00, tipoCupom: {tipo: 'Promocional'}},
+			{id: 4, codigo: 'CUPOM-4', valor: 512.75, tipoCupom: {tipo: 'Promocional'}},
+			{id: 2, codigo: 'CUPOM-2', valor: 2.50, tipoCupom: {tipo: 'Troca'}},
+			{id: 3, codigo: 'CUPOM-3', valor: 14.75, tipoCupom: {tipo: 'Troca'}},
+			{id: 5, codigo: 'CUPOM-5', valor: 5.51, tipoCupom: {tipo: 'Troca'}},
 		])
 		setCartoes([
 			{
@@ -156,7 +216,12 @@ const Carrinho = ({}) => {
 									id={'endereco'}
 									name={'endereco'}
 									icon={<i className="bi bi-plus-lg"></i>}
-									value={''}
+									value={enderecoSelecionado}
+									onChange={handleChangeEndereco}
+									options={enderecos.map(e => ({
+										value: e.id,
+										text: `${e.tipoLogradouro.tipo} ${e.logradouro} ${e.numero}`,
+									}))}
 								/>
 							</FormGroup>
 
@@ -184,7 +249,7 @@ const Carrinho = ({}) => {
 							{hasCupons &&
 								<FormGroup className={'mb-3'}>
 									<Label htmlFor={'cupons'}
-										   label={<span>Cupons - <span className={'fw-light text-muted'}>É possível selecionar diversos cupons</span></span>}/>
+										   label={<span>Cupons - <span className={'fw-light text-muted'}>É possível selecionar diversos cupons - Apenas um cupom promocional pode ser selecionado por vez</span></span>}/>
 									<SelectMultiple
 										size={3}
 										id={'cupons'}
@@ -193,7 +258,7 @@ const Carrinho = ({}) => {
 										onChange={handleChangeCupons}
 										options={cupons.map(c => ({
 											value: c.id,
-											text: `${c.codigo} - ${c.valor}`,
+											text: `${c.codigo} - ${c.valor} (${c.tipoCupom.tipo})`,
 										}))}
 									/>
 								</FormGroup>
