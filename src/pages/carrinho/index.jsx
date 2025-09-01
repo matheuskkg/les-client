@@ -9,19 +9,88 @@ import ContadorProduto from '@/_components/produto/ContadorProduto'
 import {useCarrinho} from '@/_utils/CarrinhoContext'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
+import {useEffect, useState} from 'react'
 
 const Carrinho = ({}) => {
 	const {itens, remover} = useCarrinho()
+	const router = useRouter()
+
 	const hasItens = itens.length > 0
-	const hasCupons = true
 	const precoTotalPedido = itens.reduce((precoTotal, item) => {
 		return precoTotal + item.produto.preco * item.quantidade
 	}, 0)
-	const router = useRouter()
+
+	const [cartoes, setCartoes] = useState([])
+	const [cartoesSelecionados, setCartoesSelecionados] = useState([])
+
+	function handleChangeCartoes(e) {
+		const selectedIds = Array.from(e.target.selectedOptions, o => Number(o.value))
+		setCartoesSelecionados(cartoes.filter(c => selectedIds.includes(c.id)))
+	}
+
+	const [cupons, setCupons] = useState([])
+	const [cuponsSelecionados, setCuponsSelecionados] = useState([])
+	const hasCupons = cupons.length > 0
+
+	function handleChangeCupons(e) {
+		const selectedIds = Array.from(e.target.selectedOptions, o => Number(o.value))
+		setCuponsSelecionados(cupons.filter(c => selectedIds.includes(c.id)))
+	}
 
 	function removerItem(item) {
 		remover(item)
 	}
+
+	useEffect(() => {
+		//TODO api call
+		setCupons([
+			{id: 1, codigo: 'CUPOM-1', valor: 20.00},
+			{id: 2, codigo: 'CUPOM-2', valor: 2.50},
+			{id: 3, codigo: 'CUPOM-3', valor: 14.75},
+		])
+		setCartoes([
+			{
+				id: 1,
+				bandeira: {
+					bandeira: 'Visa',
+				},
+				nomeTitular: 'c1',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
+			},
+			{
+				id: 2,
+				bandeira: {
+					bandeira: 'Visa',
+				},
+				nomeTitular: 'c2',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
+			},
+			{
+				id: 3,
+				bandeira: {
+					bandeira: 'Visa',
+				},
+				nomeTitular: 'c3',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: true,
+			},
+			{
+				id: 4,
+				bandeira: {
+					bandeira: 'Visa',
+				},
+				nomeTitular: 'c4',
+				numero: '1234 5678 9012 3456',
+				codigoSeguranca: '123',
+				preferencial: false,
+			},
+		])
+	}, [])
 
 	return (
 		<>
@@ -96,19 +165,19 @@ const Carrinho = ({}) => {
 							<h4>Forma de pagamento</h4>
 
 							<FormGroup className={'mb-3'}>
-								<Label htmlFor={'cartoes'} label={<span>Cartão - <span
-									className={'fw-light text-muted'}>É possível selecionar diversos cartões</span></span>}/>
+								<Label htmlFor={'cartoes'}
+									   label={<span>Cartão - <span className={'fw-light text-muted'}>É possível selecionar diversos cartões</span></span>}/>
 								<SelectMultipleButton
 									size={3}
 									id={'cartoes'}
 									name={'cartoes'}
 									icon={<i className="bi bi-plus-lg"></i>}
-									options={[
-										{value: 1, text: 'Cartão 1'},
-										{value: 2, text: 'Cartão 2'},
-										{value: 3, text: 'Cartão 3'},
-										{value: 4, text: 'Cartão 4'},
-									]}
+									value={cartoesSelecionados.map(c => c.id)}
+									onChange={handleChangeCartoes}
+									options={cartoes.map(c => ({
+										value: c.id,
+										text: `${c.bandeira.bandeira} - ${c.nomeTitular}`,
+									}))}
 								/>
 							</FormGroup>
 
@@ -120,12 +189,12 @@ const Carrinho = ({}) => {
 										size={3}
 										id={'cupons'}
 										name={'cupons'}
-										options={[
-											{value: 1, text: 'Cupom 1'},
-											{value: 2, text: 'Cupom 2'},
-											{value: 3, text: 'Cupom 3'},
-											{value: 4, text: 'Cupom 4'},
-										]}
+										value={cuponsSelecionados.map(c => c.id)}
+										onChange={handleChangeCupons}
+										options={cupons.map(c => ({
+											value: c.id,
+											text: `${c.codigo} - ${c.valor}`,
+										}))}
 									/>
 								</FormGroup>
 							}
