@@ -1,5 +1,6 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
+import {formatarBRL} from '@/_utils/Format'
 import {Modal} from 'antd'
 import {useEffect, useState} from 'react'
 import styles from '@/_assets/css/DivTable.module.css'
@@ -123,7 +124,7 @@ const ConsultarPedidosAdmin = ({}) => {
 									<div className={`d-flex justify-content-start my-2 ${styles.row}`}>
 										<span>{p.totalItensUnicos}</span>
 										<span>{p.totalItens}</span>
-										<span>{p.valor}</span>
+										<span>{formatarBRL(p.valor)}</span>
 										<span>{p.status}</span>
 										<span>
 											<Button

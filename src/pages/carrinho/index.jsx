@@ -10,6 +10,7 @@ import {useCarrinho} from '@/_utils/CarrinhoContext'
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
+import {formatarBRL} from '@/_utils/Format'
 
 const Carrinho = ({}) => {
 	const {itens, remover} = useCarrinho()
@@ -182,8 +183,8 @@ const Carrinho = ({}) => {
 												<img className={'img-fluid col-3'} src={item.produto.img}
 													 alt={'Placeholder'}/>
 												<p>{item.produto.nome}</p>
-												<p>Preço unitário: {item.produto.preco}</p>
-												<p>Preço total: {item.produto.preco * item.quantidade}</p>
+												<p>Preço unitário: {formatarBRL(item.produto.preco)}</p>
+												<p>Preço total: {formatarBRL(item.produto.preco * item.quantidade)}</p>
 											</div>
 
 											<div className={'d-flex justify-content-between flex-column'}>
@@ -264,7 +265,7 @@ const Carrinho = ({}) => {
 								</FormGroup>
 							}
 
-							<h5 className={'m-0 fw-semibold'}>Total da compra: {precoTotalPedido}</h5>
+							<h5 className={'m-0 fw-semibold'}>Total da compra: {formatarBRL(precoTotalPedido)}</h5>
 						</Card.Body>
 
 						<Card.Footer className={'bg-white'}>

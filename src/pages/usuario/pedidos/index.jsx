@@ -1,6 +1,7 @@
 import styles from '@/_assets/css/DivTable.module.css'
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
+import {formatarBRL} from '@/_utils/Format'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 
@@ -53,7 +54,7 @@ const ConsultarPedidos = ({}) => {
 								<div key={p.id}>
 									<div className={`d-flex justify-content-start my-2 ${styles.row}`}>
 										<span>{p.data}</span>
-										<span>{p.valor}</span>
+										<span>{formatarBRL(p.valor)}</span>
 										<span>
 											<Button
 												variant={'dark'}

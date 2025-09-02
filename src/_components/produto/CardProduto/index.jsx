@@ -1,5 +1,6 @@
 import Card from '@/_components/core/Card'
 import ContadorProduto from '@/_components/produto/ContadorProduto'
+import {formatarBRL} from '@/_utils/Format'
 
 const CardProduto = ({className = '', produto}) => {
 	return (
@@ -14,7 +15,7 @@ const CardProduto = ({className = '', produto}) => {
 
 					<div className={'d-flex justify-content-between'}>
 						<span>{produto.nome}</span>
-						<span>{produto.preco}</span>
+						<span>{formatarBRL(produto.preco)}</span>
 					</div>
 
 					<hr/>
