@@ -101,6 +101,7 @@ const ConsultarPedidosAdmin = ({}) => {
 
 	return (
 		<>
+			{/*TODO criar componente próprio*/}
 			<Card className={'col-12'}>
 				<Card.Header className={'bg-dark text-bg-dark'}>
 					<h2 className={'my-2'}>Pedidos</h2>
@@ -142,6 +143,7 @@ const ConsultarPedidosAdmin = ({}) => {
 				</Card.Body>
 			</Card>
 
+			{/*TODO criar componente próprio*/}
 			<Card className={'col-12 mt-5'}>
 				<Card.Header className={'bg-dark text-bg-dark'}>
 					<h2 className={'my-2'}>Pedidos de troca</h2>

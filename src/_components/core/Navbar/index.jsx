@@ -59,6 +59,7 @@ const Navbar = () => {
 								</a>
 								<ul className="dropdown-menu dropdown-menu-end">
 									<li><Link className="dropdown-item" href="/usuario/config">Perfil</Link></li>
+									<li><Link className="dropdown-item" href="/usuario/pedidos">Pedidos</Link></li>
 									<li>
 										<hr className="dropdown-divider"/>
 									</li>
