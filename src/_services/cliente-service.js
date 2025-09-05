@@ -12,4 +12,8 @@ export default class ClienteService extends ApiService {
 	consultar(filtro) {
 		return this.get('', filtro)
 	}
+
+	consultarEnderecos() {
+		return this.get('/enderecos')
+	}
 }
