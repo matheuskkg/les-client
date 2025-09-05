@@ -16,19 +16,19 @@ const CadastroEndereco = () => {
 	const service = new EnderecoService()
 
 	function handleChange(e) {
-		const {name, type, value, checked} = e.target
+		const { name, type, value, checked } = e.target
 		const inputValue = type === 'checkbox' ? checked : value
 
 		if (name.includes('.')) {
 			const [parent, child] = name.split('.')
 			setEndereco(prev => ({
 				...prev,
-				[parent]: {...prev[parent], [child]: inputValue},
+				[parent]: { ...prev[parent], [child]: inputValue },
 			}))
 			return
 		}
 
-		setEndereco({...endereco, [name]: inputValue})
+		setEndereco({ ...endereco, [name]: inputValue })
 	}
 
 	async function handleSubmit(e) {
@@ -36,14 +36,13 @@ const CadastroEndereco = () => {
 
 		try {
 			validarEndereco(endereco)
-			
+
 			await service.cadastrar(endereco)
 		} catch (error) {
 			let mensagens = error.response?.data?.mensagens || error.mensagens
-			
+
 			mensagens.forEach(mensagem => toast.error(mensagem))
 		}
-
 	}
 
 	const [isModalCancelarOpen, setIsModalCancelarOpen] = useState(false)
