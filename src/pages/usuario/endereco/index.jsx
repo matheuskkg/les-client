@@ -1,21 +1,26 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormEndereco from '@/_components/endereco/FormEndereco'
-import {Modal} from 'antd'
+import { Modal } from 'antd'
 import Link from 'next/link'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
+import ClienteService from '@/_services/cliente-service'
 
 const ConsultaEnderecos = () => {
+	const [rows, setRows] = useState([])
+
 	const [isModalEditarOpen, setIsModalEditarOpen] = useState(false)
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
 
 	const [enderecoEditando, setEnderecoEditando] = useState({})
 	const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
 
+	const service = new ClienteService()
+
 	function handleChangeEnderecoEditando(e) {
-		const {name, type, value, checked} = e.target
+		const { name, type, value, checked } = e.target
 		const inputValue = type === 'checkbox' ? checked : value
-		setEnderecoEditando({...enderecoEditando, [name]: inputValue})
+		setEnderecoEditando({ ...enderecoEditando, [name]: inputValue })
 	}
 
 	function showModalEditar(endereco) {
@@ -45,91 +50,7 @@ const ConsultaEnderecos = () => {
 
 	}
 
-	const [rows, setRows] = useState([])
-	useEffect(() => {
-		const enderecos = [
-			{
-				id: 1,
-				nomeIdentificador: 'nome1',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
-				},
-				logradouro: 'abc',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
-			},
-			{
-				id: 2,
-				nomeIdentificador: 'nome2',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
-				},
-				logradouro: 'jhg',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
-			},
-			{
-				id: 3,
-				nomeIdentificador: 'nome3',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
-				},
-				logradouro: 'kfgkf',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
-			},
-			{
-				id: 4,
-				nomeIdentificador: 'nome4',
-				pais: 'pais',
-				estado: 'bcd',
-				cidade: 'abc',
-				tipoLogradouro: {
-					tipo: 'Rua',
-				},
-				logradouro: 'aewewewbc',
-				tipoResidencia: {
-					tipo: 'Casa',
-				},
-				numero: '123A',
-				bairro: 'ju',
-				cep: '123412412',
-				observacao: 'asdaw',
-				cobranca: true,
-				entrega: true,
-			},
-		]
-
+	function enderecosToRows(enderecos) {
 		const length = enderecos.length
 		const rows = enderecos.map((e, index) => {
 			const res = e.tipoLogradouro.tipo + ' ' + e.logradouro + ', ' + e.cidade + ' - ' + e.estado
@@ -157,13 +78,21 @@ const ConsultaEnderecos = () => {
 					</div>
 
 					{
-						shouldReturnHr && <hr className="m-1"/>
+						shouldReturnHr && <hr className="m-1" />
 					}
 				</div>
 			)
 		})
 
 		setRows(rows)
+	}
+
+	useEffect(() => {
+		service.consultarEnderecos()
+			.then(response => {
+				enderecosToRows(response.data.entidades)
+			})
+			.catch(error => console.log(error))
 	}, [])
 
 	return (
@@ -186,7 +115,7 @@ const ConsultaEnderecos = () => {
 
 						<Card.Body>
 							<div
-								style={{maxHeight: 500, overflowY: 'auto'}}
+								style={{ maxHeight: 500, overflowY: 'auto' }}
 							>
 								{rows}
 							</div>
