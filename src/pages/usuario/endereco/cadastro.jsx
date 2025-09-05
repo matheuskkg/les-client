@@ -1,24 +1,52 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormEndereco from '@/_components/endereco/FormEndereco'
-import {defaultEndereco} from '@/_utils/DefaultValues'
-import {Modal} from 'antd'
-import {useRouter} from 'next/router'
-import {useState} from 'react'
+import { defaultEndereco } from '@/_utils/DefaultValues'
+import { Modal } from 'antd'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import EnderecoService from '@/_services/endereco-service'
+import { toast } from 'react-toastify'
+import validarEndereco from '@/_utils/validators/validators'
 
 const CadastroEndereco = () => {
 	const [endereco, setEndereco] = useState(defaultEndereco)
 
 	const router = useRouter()
+	const service = new EnderecoService()
 
 	function handleChange(e) {
 		const {name, type, value, checked} = e.target
 		const inputValue = type === 'checkbox' ? checked : value
+
+		if (name.includes('.')) {
+			const [parent, child] = name.split('.')
+			setEndereco(prev => ({
+				...prev,
+				[parent]: {...prev[parent], [child]: inputValue},
+			}))
+			return
+		}
+
 		setEndereco({...endereco, [name]: inputValue})
 	}
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault()
+
+		try {
+			validarEndereco(endereco)
+			
+			await service.cadastrar(endereco)
+		} catch (error) {
+			if (error.response) {
+				error.response.data.mensagens.forEach(mensagem => toast.error(mensagem))
+			}
+
+			if (error.mensagens) {
+				error.mensagens.forEach(mensagem => toast.error(mensagem))
+			}
+		}
 
 	}
 
@@ -39,7 +67,7 @@ const CadastroEndereco = () => {
 					<h3 className={'my-2'}>Cadastro de endereço</h3>
 				</Card.Header>
 
-				<form>
+				<form onSubmit={handleSubmit}>
 					<Card.Body>
 						<FormEndereco
 							obj={endereco}
@@ -63,7 +91,6 @@ const CadastroEndereco = () => {
 								variant={'dark'}
 								icon={<i className="bi bi-download"></i>}
 								text={'Salvar'}
-								onClick={handleSubmit}
 							/>
 						</div>
 					</Card.Footer>
