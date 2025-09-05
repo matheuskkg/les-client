@@ -39,13 +39,9 @@ const CadastroEndereco = () => {
 			
 			await service.cadastrar(endereco)
 		} catch (error) {
-			if (error.response) {
-				error.response.data.mensagens.forEach(mensagem => toast.error(mensagem))
-			}
-
-			if (error.mensagens) {
-				error.mensagens.forEach(mensagem => toast.error(mensagem))
-			}
+			let mensagens = error.response?.data?.mensagens || error.mensagens
+			
+			mensagens.forEach(mensagem => toast.error(mensagem))
 		}
 
 	}
