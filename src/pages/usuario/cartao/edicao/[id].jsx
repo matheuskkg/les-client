@@ -15,7 +15,7 @@ const EdicaoCartao = () => {
         await service.editar(cartao)
 
         toast.success('Cartão editado.')
-        router.replace('/usuario/cartao')
+        router.replace('/usuario/perfil')
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const EdicaoCartao = () => {
                     title: 'Cancelar edição',
                     message: 'Tem certeza que deseja cancelar a edição?',
                 },
-                pathCancelar: '/usuario/cartao'
+                pathCancelar: '/usuario/perfil'
             }}
         />
     )

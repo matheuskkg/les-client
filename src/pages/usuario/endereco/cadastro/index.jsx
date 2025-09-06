@@ -11,7 +11,7 @@ const CadastroEndereco = () => {
         await service.cadastrar(endereco)
 
         toast.success('Endereço cadastrado.')
-        router.replace('/usuario/endereco')
+        router.replace('/usuario/perfil')
     }
 
     return (
@@ -23,7 +23,7 @@ const CadastroEndereco = () => {
                     title: 'Cancelar cadastro',
                     message: 'Tem certeza que deseja cancelar o cadastro?'
                 },
-                pathCancelar: '/usuario/endereco'
+                pathCancelar: '/usuario/perfil'
             }}
         />
     )

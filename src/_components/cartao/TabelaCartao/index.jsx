@@ -8,14 +8,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
-const ConsultaCartoes = () => {
-	const [cartoes, setCartoes] = useState([])
+const service = new ClienteService()
+const cartaoService = new CartaoService()
+
+const TabelaCartao = () => {
+    const [cartoes, setCartoes] = useState([])
 	const [rows, setRows] = useState([])
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
 	const [cartaoExcluindo, setCartaoExcluindo] = useState({})
 
-	const service = new ClienteService()
-	const cartaoService = new CartaoService()
 	const router = useRouter()
 
 	function showModalExcluir(cartao) {
@@ -90,7 +91,7 @@ const ConsultaCartoes = () => {
 
 	return (
 		<>
-			<div className={'container-xxl'}>
+			<div className={'container'}>
 				<div className={'col-md-9 col-12 m-auto'}>
 					<Card>
 						<Card.Header className={'bg-transparent'}>
@@ -153,6 +154,4 @@ const ConsultaCartoes = () => {
 	)
 }
 
-//ConsultaCartoes.auth = true
-
-export default ConsultaCartoes
+export default TabelaCartao

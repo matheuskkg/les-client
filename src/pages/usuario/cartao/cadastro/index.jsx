@@ -11,7 +11,7 @@ const CadastroCartao = () => {
         await service.cadastrar(cartao)
 
         toast.success('Cartão cadastrado.')
-        router.replace('/usuario/cartao')
+        router.replace('/usuario/perfil')
     }
 
     return (
@@ -23,7 +23,7 @@ const CadastroCartao = () => {
                     title: 'Cancelar cadastro',
                     message: 'Tem certeza que deseja cancelar o cadastro?'
                 },
-                pathCancelar: '/usuario/cartao'
+                pathCancelar: '/usuario/perfil'
             }}
         />
     )
