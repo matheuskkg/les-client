@@ -16,4 +16,8 @@ export default class ClienteService extends ApiService {
 	consultarEnderecos() {
 		return this.get('/enderecos')
 	}
+
+	consultarCartoes() {
+		return this.get('/cartoes')
+	}
 }
