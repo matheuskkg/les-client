@@ -2,6 +2,7 @@ import TelaCadastro from "@/_components/endereco/TelaCadastro"
 import { useState, useEffect } from "react"
 import EnderecoService from "@/_services/endereco-service"
 import { useRouter } from "next/router"
+import { toast } from "react-toastify"
 
 const EdicaoEndereco = () => {
     const [endereco, setEndereco] = useState(null)
@@ -12,6 +13,9 @@ const EdicaoEndereco = () => {
 
     function editar(endereco) {
         service.editar(endereco)
+
+        toast.success('Endereço editado.')
+        router.replace('/usuario/endereco')
     }
 
     useEffect(() => {
