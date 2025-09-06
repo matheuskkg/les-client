@@ -30,10 +30,10 @@ const ConsultaCartoes = () => {
 	async function handleExcluirCartao() {
 		try {
 			await cartaoService.excluir(cartaoExcluindo)
-			
+
 			toast.success('Cartão excluído com sucesso!')
 			closeModalExcluir()
-			
+
 			setCartoes(cartoes.filter(c => c.id !== cartaoExcluindo.id))
 		} catch (error) {
 			const mensagens = error.response?.data?.mensagens || ['Erro ao excluir cartão.']
@@ -95,7 +95,10 @@ const ConsultaCartoes = () => {
 					<Card>
 						<Card.Header className={'bg-transparent'}>
 							<div className={'d-flex justify-content-between align-items-center'}>
-								<h3 className={'m-0'}>Cartões</h3>
+								<div className='d-flex justify-content-center align-items-end'>
+									<h3 className={'m-0 me-2'}>Cartões -</h3>
+									<span className='text-muted'>{cartoes.length} cartões cadastrados</span>
+								</div>
 
 								<Link
 									href={'/usuario/cartao/cadastro'}
@@ -108,7 +111,7 @@ const ConsultaCartoes = () => {
 
 						<Card.Body>
 							<div
-								style={{ maxHeight: 500, overflowY: 'auto' }}
+								style={{ maxHeight: 200, overflowY: 'auto' }}
 							>
 								{rows}
 							</div>

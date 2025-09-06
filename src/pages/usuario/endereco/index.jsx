@@ -96,7 +96,10 @@ const ConsultaEnderecos = () => {
 					<Card>
 						<Card.Header className={'bg-transparent'}>
 							<div className="d-flex justify-content-between align-items-center">
-								<h3 className={'m-0'}>Endereços</h3>
+								<div className='d-flex justify-content-center align-items-end'>
+									<h3 className={'m-0 me-2'}>Endereços -</h3>
+									<span className='text-muted'>{enderecos.length} endereços cadastrados</span>
+								</div>
 
 								<Link
 									href={'/usuario/endereco/cadastro'}
@@ -109,7 +112,7 @@ const ConsultaEnderecos = () => {
 
 						<Card.Body>
 							<div
-								style={{ maxHeight: 500, overflowY: 'auto' }}
+								style={{ maxHeight: 200, overflowY: 'auto' }}
 							>
 								{rows}
 							</div>
