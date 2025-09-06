@@ -13,6 +13,10 @@ export default class EnderecoService extends ApiService {
 		return this.patch(`/${endereco.id}`, endereco)
 	}
 
+	excluir(endereco) {
+		return this.delete(`/${endereco.id}`)
+	}
+
 	consultarPorId(id) {
 		return this.get(`/${id}`)
 	}

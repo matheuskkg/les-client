@@ -4,14 +4,18 @@ import { Modal } from 'antd'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ClienteService from '@/_services/cliente-service'
+import EnderecoService from '@/_services/endereco-service'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 const ConsultaEnderecos = () => {
+	const [enderecos, setEnderecos] = useState([])
 	const [rows, setRows] = useState([])
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
 	const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
 
 	const service = new ClienteService()
+	const enderecoService = new EnderecoService()
 	const router = useRouter()
 
 	function showModalExcluir(endereco) {
@@ -23,13 +27,24 @@ const ConsultaEnderecos = () => {
 		setIsModalExcluirOpen(false)
 	}
 
-	function handleExcluirEndereco() {
+	async function handleExcluirEndereco() {
+		try {
+			await enderecoService.excluir(enderecoExcluindo)
 
+			toast.success('Endereço excluído.')
+			closeModalExcluir()
+
+			setEnderecos(prev => prev.filter(e => e.id !== enderecoExcluindo.id))
+		} catch (error) {
+			const mensagens = error.response?.data?.mensagens || ['Erro ao excluir endereço.']
+
+			mensagens.forEach(mensagem => toast.error(mensagem))
+		}
 	}
 
-	function enderecosToRows(enderecos) {
+	function enderecosToRows() {
 		const length = enderecos.length
-		const rows = enderecos.map((e, index) => {
+		return enderecos.map((e, index) => {
 			const res = e.tipoLogradouro.tipo + ' ' + e.logradouro + ', ' + e.cidade + ' - ' + e.estado
 			const shouldReturnHr = index < length - 1
 
@@ -60,17 +75,19 @@ const ConsultaEnderecos = () => {
 				</div>
 			)
 		})
-
-		setRows(rows)
 	}
 
 	useEffect(() => {
 		service.consultarEnderecos()
 			.then(response => {
-				enderecosToRows(response.data.entidades)
+				setEnderecos(response.data.entidades)
 			})
 			.catch(error => console.log(error))
 	}, [])
+
+	useEffect(() => {
+		setRows(enderecosToRows())
+	}, [enderecos])
 
 	return (
 		<>
