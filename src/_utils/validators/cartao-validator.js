@@ -15,7 +15,7 @@ export default function validar(cartao) {
         mensagens.push('O número do cartão deve ter 16 dígitos')
     }
 
-    if (!cartao.bandeira.bandeira) {
+    if (!cartao.bandeira.id) {
         mensagens.push('Selecione a bandeira do cartão')
     }
 
