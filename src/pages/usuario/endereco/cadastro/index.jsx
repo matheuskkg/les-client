@@ -7,8 +7,8 @@ const CadastroEndereco = () => {
     const service = new EnderecoService
     const router = useRouter()
 
-    function cadastrar(endereco) {
-        service.cadastrar(endereco)
+    async function cadastrar(endereco) {
+        await service.cadastrar(endereco)
 
         toast.success('Endereço cadastrado.')
         router.replace('/usuario/endereco')

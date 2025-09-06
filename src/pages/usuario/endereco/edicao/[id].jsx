@@ -11,8 +11,8 @@ const EdicaoEndereco = () => {
     const service = new EnderecoService()
     const router = useRouter()
 
-    function editar(endereco) {
-        service.editar(endereco)
+    async function editar(endereco) {
+        await service.editar(endereco)
 
         toast.success('Endereço editado.')
         router.replace('/usuario/endereco')
