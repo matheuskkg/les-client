@@ -30,10 +30,10 @@ const FormCartao = ({ obj, onChange }) => {
 			<Label htmlFor={'bandeira'} label={'*Bandeira:'} />
 			<Select
 				id={'bandeira'}
-				name={'bandeira.bandeira'}
-				value={obj.bandeira.bandeira}
+				name={'bandeira.id'}
+				value={obj.bandeira.id}
 				onChange={onChange}
-				options={bandeiras.map(b => ({ value: b.bandeira, text: b.bandeira }))}
+				options={bandeiras.map(b => ({ value: b.id, text: b.bandeira }))}
 			/>
 		</FormGroup>
 	)
