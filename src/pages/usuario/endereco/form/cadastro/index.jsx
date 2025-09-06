@@ -1,15 +1,15 @@
-import TelaCadastroEndereco from '@/_components/endereco/TelaCadastro'
+import TelaCadastro from '@/_components/endereco/TelaCadastro'
 import EnderecoService from '@/_services/endereco-service'
 
 const CadastroEndereco = () => {
     const service = new EnderecoService
-    
+
     function cadastrar(endereco) {
         service.cadastrar(endereco)
     }
 
     return (
-        <TelaCadastroEndereco
+        <TelaCadastro
             onSubmit={cadastrar}
             info={{
                 title: 'Cadastro de endereço',
