@@ -7,8 +7,8 @@ const CadastroCartao = () => {
     const service = new CartaoService()
     const router = useRouter()
 
-    function cadastrar(cartao) {
-        service.cadastrar(cartao)
+    async function cadastrar(cartao) {
+        await service.cadastrar(cartao)
 
         toast.success('Cartão cadastrado.')
         router.replace('/usuario/cartao')

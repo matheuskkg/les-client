@@ -11,8 +11,8 @@ const EdicaoCartao = () => {
     const service = new CartaoService()
     const router = useRouter()
 
-    function editar(cartao) {
-        service.editar(cartao)
+    async function editar(cartao) {
+        await service.editar(cartao)
 
         toast.success('Cartão editado.')
         router.replace('/usuario/cartao')
