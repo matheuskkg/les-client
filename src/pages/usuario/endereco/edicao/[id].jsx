@@ -35,7 +35,8 @@ const EdicaoEndereco = () => {
                 modal: {
                     title: 'Cancelar edição',
                     message: 'Tem certeza que deseja cancelar a edição?'
-                }
+                },
+                pathCancelar: '/usuario/endereco'
             }}
         />
     )

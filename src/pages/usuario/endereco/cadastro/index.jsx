@@ -16,7 +16,8 @@ const CadastroEndereco = () => {
                 modal: {
                     title: 'Cancelar cadastro',
                     message: 'Tem certeza que deseja cancelar o cadastro?'
-                }
+                },
+                pathCancelar: '/usuario/endereco'
             }}
         />
     )

@@ -109,7 +109,7 @@ const TelaCadastro = ({ initialEndereco, info, onSubmit }) => {
 								icon={<i className="bi bi-check-lg"></i>}
 								text={'Sim'}
 								variant={'dark'}
-								onClick={router.back}
+								onClick={() => router.replace(info.pathCancelar)}
 							/>
 						</div>
 					}
