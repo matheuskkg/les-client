@@ -1,41 +1,18 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
-import FormEndereco from '@/_components/endereco/FormEndereco'
 import { Modal } from 'antd'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ClienteService from '@/_services/cliente-service'
+import { useRouter } from 'next/router'
 
 const ConsultaEnderecos = () => {
 	const [rows, setRows] = useState([])
-
-	const [isModalEditarOpen, setIsModalEditarOpen] = useState(false)
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
-
-	const [enderecoEditando, setEnderecoEditando] = useState({})
 	const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
 
 	const service = new ClienteService()
-
-	function handleChangeEnderecoEditando(e) {
-		const { name, type, value, checked } = e.target
-		const inputValue = type === 'checkbox' ? checked : value
-		setEnderecoEditando({ ...enderecoEditando, [name]: inputValue })
-	}
-
-	function showModalEditar(endereco) {
-		setEnderecoEditando(endereco)
-		setIsModalEditarOpen(true)
-	}
-
-	function closeModalEditar() {
-		setIsModalEditarOpen(false)
-	}
-
-	function handleEditarEndereco(e) {
-		e.preventDefault()
-
-	}
+	const router = useRouter()
 
 	function showModalExcluir(endereco) {
 		setEnderecoExcluindo(endereco)
@@ -66,7 +43,7 @@ const ConsultaEnderecos = () => {
 								className="me-1"
 								variant={'dark'}
 								icon={<i className="bi bi-pencil"></i>}
-								onClick={() => showModalEditar(e)}
+								onClick={() => router.push(`/usuario/endereco/edicao/${e.id}`)}
 							/>
 
 							<Button
@@ -123,47 +100,6 @@ const ConsultaEnderecos = () => {
 					</Card>
 				</div>
 			</div>
-
-			{isModalEditarOpen && (
-				<Modal
-					centered={true}
-					title={<h3>Alterar endereço</h3>}
-					open={isModalEditarOpen}
-					onCancel={closeModalEditar}
-					footer={null}
-					width={{
-						xs: '90%',
-						md: '70%',
-						xl: '50%',
-					}}
-				>
-					<form>
-						<FormEndereco
-							obj={enderecoEditando}
-							onChange={handleChangeEnderecoEditando}
-						/>
-
-						<div>
-							<Button
-								type={'submit'}
-								className={'w-100 mt-3 mb-2'}
-								icon={<i className="bi bi-check-lg"></i>}
-								text={'Confirmar'}
-								variant={'dark'}
-								onClick={handleEditarEndereco}
-							/>
-
-							<Button
-								className={'w-100'}
-								icon={<i className="bi bi-x-lg"></i>}
-								text={'Cancelar'}
-								variant={'dark'}
-								onClick={closeModalEditar}
-							/>
-						</div>
-					</form>
-				</Modal>
-			)}
 
 			{isModalExcluirOpen && (
 				<Modal

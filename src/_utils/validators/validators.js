@@ -1,6 +1,6 @@
 import ValidacaoException from "@/_exceptions/validacao-exception"
 
-export default function validarEndereco(endereco) {
+export function validarEndereco(endereco) {
     const mensagens = []
 
     if (!endereco.nomeIdentificador.trim()) {

@@ -1,19 +1,17 @@
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
 import FormEndereco from '@/_components/endereco/FormEndereco'
-import { defaultEndereco } from '@/_utils/DefaultValues'
 import { Modal } from 'antd'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
-import EnderecoService from '@/_services/endereco-service'
+import { defaultEndereco } from '@/_utils/DefaultValues'
 import { toast } from 'react-toastify'
-import validarEndereco from '@/_utils/validators/validators'
+import { useRouter } from 'next/router'
+import { validarEndereco } from '@/_utils/validators/validators'
 
-const CadastroEndereco = () => {
-	const [endereco, setEndereco] = useState(defaultEndereco)
-
+const TelaCadastro = ({ initialEndereco, info, onSubmit }) => {
+	const [endereco, setEndereco] = useState(initialEndereco || defaultEndereco)
+	const [isModalCancelarOpen, setIsModalCancelarOpen] = useState(false)
 	const router = useRouter()
-	const service = new EnderecoService()
 
 	function handleChange(e) {
 		const { name, type, value, checked } = e.target
@@ -37,15 +35,13 @@ const CadastroEndereco = () => {
 		try {
 			validarEndereco(endereco)
 
-			await service.cadastrar(endereco)
+			onSubmit(endereco)
 		} catch (error) {
-			let mensagens = error.response?.data?.mensagens || error.mensagens
+			const mensagens = error.response?.data?.mensagens || error.mensagens || [error.message]
 
-			mensagens.forEach(mensagem => toast.error(mensagem))
+			mensagens.forEach(m => toast.error(m))
 		}
 	}
-
-	const [isModalCancelarOpen, setIsModalCancelarOpen] = useState(false)
 
 	function showModalCancelar() {
 		setIsModalCancelarOpen(true)
@@ -59,7 +55,7 @@ const CadastroEndereco = () => {
 		<>
 			<Card className={'col-12 col-md-9 col-xxl-7'}>
 				<Card.Header className={'bg-transparent'}>
-					<h3 className={'my-2'}>Cadastro de endereço</h3>
+					<h3 className={'my-2'}>{info.title}</h3>
 				</Card.Header>
 
 				<form onSubmit={handleSubmit}>
@@ -95,7 +91,7 @@ const CadastroEndereco = () => {
 			{isModalCancelarOpen && (
 				<Modal
 					centered={true}
-					title={<h3>Cancelar cadastro</h3>}
+					title={<h3>{info.modal.title}</h3>}
 					open={isModalCancelarOpen}
 					onCancel={closeModalCancelar}
 					footer={
@@ -107,23 +103,22 @@ const CadastroEndereco = () => {
 								variant={'dark'}
 								onClick={closeModalCancelar}
 							/>
+
 							<Button
 								className={'w-100 ms-2'}
 								icon={<i className="bi bi-check-lg"></i>}
 								text={'Sim'}
 								variant={'dark'}
-								onClick={router.back}
+								onClick={() => router.replace(info.pathCancelar)}
 							/>
 						</div>
 					}
 				>
-					<p>Tem certeza que deseja cancelar o cadastro?</p>
+					<p>{info.modal.message}</p>
 				</Modal>
 			)}
 		</>
 	)
 }
 
-//CadastroEndereco.auth = true
-
-export default CadastroEndereco
+export default TelaCadastro
