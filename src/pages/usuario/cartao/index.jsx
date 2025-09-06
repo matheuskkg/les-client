@@ -1,36 +1,22 @@
-import FormCartao from '@/_components/cartao/FormCartao'
 import Button from '@/_components/core/Button'
 import Card from '@/_components/core/Card'
-import {Modal} from 'antd'
+import ClienteService from '@/_services/cliente-service'
+import CartaoService from '@/_services/cartao-service'
+import { Modal } from 'antd'
 import Link from 'next/link'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 const ConsultaCartoes = () => {
-	const [isModalEditarOpen, setIsModalEditarOpen] = useState(false)
+	const [cartoes, setCartoes] = useState([])
+	const [rows, setRows] = useState([])
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
-
-	const [cartaoEditando, setCartaoEditando] = useState({})
 	const [cartaoExcluindo, setCartaoExcluindo] = useState({})
 
-	function handleChangeCartaoEditando(e) {
-		const {name, type, value, checked} = e.target
-		const inputValue = type === 'checkbox' ? checked : value
-		setCartaoEditando({...cartaoEditando, [name]: inputValue})
-	}
-
-	function showModalEditar(cartao) {
-		setCartaoEditando(cartao)
-		setIsModalEditarOpen(true)
-	}
-
-	function closeModalEditar() {
-		setIsModalEditarOpen(false)
-	}
-
-	function handleEditarCartao(e) {
-		e.preventDefault()
-
-	}
+	const service = new ClienteService()
+	const cartaoService = new CartaoService()
+	const router = useRouter()
 
 	function showModalExcluir(cartao) {
 		setCartaoExcluindo(cartao)
@@ -45,49 +31,9 @@ const ConsultaCartoes = () => {
 
 	}
 
-	const [rows, setRows] = useState([])
-	useEffect(() => {
-		const cartoes = [
-			{
-				bandeira: {
-					bandeira: 'Visa',
-				},
-				nomeTitular: 'c1',
-				numero: '1234 5678 9012 3456',
-				codigoSeguranca: '123',
-				preferencial: false,
-			},
-			{
-				bandeira: {
-					bandeira: 'Visa',
-				},
-				nomeTitular: 'c2',
-				numero: '1234 5678 9012 3456',
-				codigoSeguranca: '123',
-				preferencial: false,
-			},
-			{
-				bandeira: {
-					bandeira: 'Visa',
-				},
-				nomeTitular: 'c3',
-				numero: '1234 5678 9012 3456',
-				codigoSeguranca: '123',
-				preferencial: true,
-			},
-			{
-				bandeira: {
-					bandeira: 'Visa',
-				},
-				nomeTitular: 'c4',
-				numero: '1234 5678 9012 3456',
-				codigoSeguranca: '123',
-				preferencial: false,
-			},
-		]
-
+	function cartoesToRows() {
 		const length = cartoes.length
-		const rows = cartoes.map((c, index) => {
+		return cartoes.map((c, index) => {
 			const res = c.bandeira.bandeira + ' - ' + c.nomeTitular
 			const shouldReturnHr = index < length - 1
 
@@ -101,7 +47,7 @@ const ConsultaCartoes = () => {
 								className="me-1"
 								variant={'dark'}
 								icon={<i className="bi bi-pencil"></i>}
-								onClick={() => showModalEditar(c)}
+								onClick={() => router.push(`/usuario/cartao/edicao/${c.id}`)}
 							/>
 
 							<Button
@@ -113,14 +59,23 @@ const ConsultaCartoes = () => {
 					</div>
 
 					{
-						shouldReturnHr && <hr className="m-1"/>
+						shouldReturnHr && <hr className="m-1" />
 					}
 				</div>
 			)
 		})
+	}
 
-		setRows(rows)
+	useEffect(() => {
+		service.consultarCartoes()
+			.then(response => {
+				setCartoes(response.data.entidades)
+			})
 	}, [])
+
+	useEffect(() => {
+		setRows(cartoesToRows())
+	}, [cartoes])
 
 	return (
 		<>
@@ -142,7 +97,7 @@ const ConsultaCartoes = () => {
 
 						<Card.Body>
 							<div
-								style={{maxHeight: 500, overflowY: 'auto'}}
+								style={{ maxHeight: 500, overflowY: 'auto' }}
 							>
 								{rows}
 							</div>
@@ -150,47 +105,6 @@ const ConsultaCartoes = () => {
 					</Card>
 				</div>
 			</div>
-
-			{isModalEditarOpen && (
-				<Modal
-					centered={true}
-					title={<h3>Alterar cartão</h3>}
-					open={isModalEditarOpen}
-					onCancel={closeModalEditar}
-					footer={null}
-					width={{
-						xs: '90%',
-						md: '70%',
-						xl: '50%',
-					}}
-				>
-					<form>
-						<FormCartao
-							obj={cartaoEditando}
-							onChange={handleChangeCartaoEditando}
-						/>
-
-						<div>
-							<Button
-								type={'submit'}
-								className={'w-100 mt-3 mb-2'}
-								icon={<i className="bi bi-check-lg"></i>}
-								text={'Confirmar'}
-								variant={'dark'}
-								onClick={handleEditarCartao}
-							/>
-
-							<Button
-								className={'w-100'}
-								icon={<i className="bi bi-x-lg"></i>}
-								text={'Cancelar'}
-								variant={'dark'}
-								onClick={closeModalEditar}
-							/>
-						</div>
-					</form>
-				</Modal>
-			)}
 
 			{isModalExcluirOpen && (
 				<Modal
