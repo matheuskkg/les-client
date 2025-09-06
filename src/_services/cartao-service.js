@@ -8,4 +8,8 @@ export default class CartaoService extends ApiService {
     cadastrar(cartao) {
         return this.post('', cartao)
     }
+
+    excluir(cartao) {
+        return this.delete(`/${cartao.id}`)
+    }
 }
