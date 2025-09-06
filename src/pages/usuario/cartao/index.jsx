@@ -27,8 +27,19 @@ const ConsultaCartoes = () => {
 		setIsModalExcluirOpen(false)
 	}
 
-	function handleExcluirCartao() {
+	async function handleExcluirCartao() {
+		try {
+			await cartaoService.excluir(cartaoExcluindo)
+			
+			toast.success('Cartão excluído com sucesso!')
+			closeModalExcluir()
+			
+			setCartoes(cartoes.filter(c => c.id !== cartaoExcluindo.id))
+		} catch (error) {
+			const mensagens = error.response?.data?.mensagens || ['Erro ao excluir cartão.']
 
+			mensagens.forEach(mensagem => toast.error(mensagem))
+		}
 	}
 
 	function cartoesToRows() {
