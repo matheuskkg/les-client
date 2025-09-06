@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { defaultEndereco } from '@/_utils/DefaultValues'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
-import { validarEndereco } from '@/_utils/validators/validators'
+import { validar } from '@/_utils/validators/endereco-validator'
 
 const TelaCadastro = ({ initialEndereco, info, onSubmit }) => {
 	const [endereco, setEndereco] = useState(initialEndereco || defaultEndereco)
@@ -33,7 +33,7 @@ const TelaCadastro = ({ initialEndereco, info, onSubmit }) => {
 		e.preventDefault()
 
 		try {
-			validarEndereco(endereco)
+			validar(endereco)
 
 			onSubmit(endereco)
 		} catch (error) {
