@@ -42,7 +42,7 @@ export default function App({Component, pageProps}) {
 			<AuthProvider>
 				<CarrinhoProvider>
 					<Navbar/>
-					<div className={'page-center bg-secondary-subtle'}>
+					<div className={'page-center'}>
 						<Guard Component={Component} pageProps={pageProps}/>
 					</div>
 				</CarrinhoProvider>
