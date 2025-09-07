@@ -8,15 +8,14 @@ import EnderecoService from '@/_services/endereco-service'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
-const service = new ClienteService()
-const enderecoService = new EnderecoService()
-
 const TabelaEndereco = () => {
     const [enderecos, setEnderecos] = useState([])
     const [rows, setRows] = useState([])
     const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
     const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
 
+    const service = new ClienteService()
+    const enderecoService = new EnderecoService()
     const router = useRouter()
 
     function showModalExcluir(endereco) {
@@ -79,11 +78,17 @@ const TabelaEndereco = () => {
     }
 
     useEffect(() => {
-        service.consultarEnderecos()
-            .then(response => {
+        async function consultar() {
+            try {
+                const response = await service.consultarEnderecos()
+
                 setEnderecos(response.data.entidades)
-            })
-            .catch(error => console.log(error))
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        consultar()
     }, [])
 
     useEffect(() => {

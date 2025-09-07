@@ -8,15 +8,14 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
-const service = new ClienteService()
-const cartaoService = new CartaoService()
-
 const TabelaCartao = () => {
-    const [cartoes, setCartoes] = useState([])
+	const [cartoes, setCartoes] = useState([])
 	const [rows, setRows] = useState([])
 	const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
 	const [cartaoExcluindo, setCartaoExcluindo] = useState({})
 
+	const service = new ClienteService()
+	const cartaoService = new CartaoService()
 	const router = useRouter()
 
 	function showModalExcluir(cartao) {
@@ -79,10 +78,17 @@ const TabelaCartao = () => {
 	}
 
 	useEffect(() => {
-		service.consultarCartoes()
-			.then(response => {
+		async function consultar() {
+			try {
+				const response = await service.consultarCartoes()
+
 				setCartoes(response.data.entidades)
-			})
+			} catch (error) {
+				console.log(error)
+			}
+		}
+
+		consultar()
 	}, [])
 
 	useEffect(() => {
