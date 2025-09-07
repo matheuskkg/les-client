@@ -5,6 +5,7 @@ import Select from '@/_components/core/Select'
 import BandeiraService from '@/_services/bandeira-service'
 import { useMedia } from 'use-media'
 import { useState, useEffect } from 'react'
+import Checkbox from '@/_components/core/Checkbox'
 
 const FormCartao = ({ obj, onChange }) => {
 	const [bandeiras, setBandeiras] = useState([])
@@ -26,7 +27,7 @@ const FormCartao = ({ obj, onChange }) => {
 	)
 
 	const inputBandeira = (
-		<FormGroup className={'col-sm-6'}>
+		<FormGroup className={'col-sm-6 mb-3'}>
 			<Label htmlFor={'bandeira'} label={'*Bandeira:'} />
 			<Select
 				id={'bandeira'}
@@ -86,6 +87,13 @@ const FormCartao = ({ obj, onChange }) => {
 						{inputBandeira}
 					</>
 				)}
+			</div>
+
+			<div className="d-flex">
+				<FormGroup>
+					<Checkbox id={'preferencial'} name={'preferencial'} value={obj.preferencial} onChange={onChange} />
+					<Label htmlFor={'preferencial'} label={'Preferencial'} variant={'check-label'} className={'ms-1'} />
+				</FormGroup>
 			</div>
 		</>
 	)
