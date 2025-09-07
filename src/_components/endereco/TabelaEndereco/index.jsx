@@ -97,34 +97,32 @@ const TabelaEndereco = () => {
 
     return (
         <>
-            <div className="container">
-                <div className="col-md-9 col-12 m-auto">
-                    <Card>
-                        <Card.Header className={'bg-transparent'}>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className='d-flex justify-content-center align-items-end'>
-                                    <h3 className={'m-0 me-2'}>Endereços -</h3>
-                                    <span className='text-muted'>{enderecos.length} endereços cadastrados</span>
-                                </div>
-
-                                <Link
-                                    href={'/usuario/endereco/cadastro'}
-                                    className={'btn btn-sm btn-dark'}
-                                >
-                                    Cadastrar endereço
-                                </Link>
+            <div className="col-md-9 col-12 m-auto">
+                <Card>
+                    <Card.Header className={'bg-transparent'}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className='d-flex justify-content-center align-items-end'>
+                                <h3 className={'m-0 me-2'}>Endereços -</h3>
+                                <span className='text-muted'>{enderecos.length} endereços cadastrados</span>
                             </div>
-                        </Card.Header>
 
-                        <Card.Body>
-                            <div
-                                style={{ maxHeight: 200, overflowY: 'auto' }}
+                            <Link
+                                href={'/usuario/endereco/cadastro'}
+                                className={'btn btn-sm btn-dark'}
                             >
-                                {rows}
-                            </div>
-                        </Card.Body>
-                    </Card>
-                </div>
+                                Cadastrar endereço
+                            </Link>
+                        </div>
+                    </Card.Header>
+
+                    <Card.Body>
+                        <div
+                            style={{ maxHeight: 200, overflowY: 'auto' }}
+                        >
+                            {rows}
+                        </div>
+                    </Card.Body>
+                </Card>
             </div>
 
             {isModalExcluirOpen && (

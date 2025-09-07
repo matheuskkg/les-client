@@ -97,34 +97,32 @@ const TabelaCartao = () => {
 
 	return (
 		<>
-			<div className={'container'}>
-				<div className={'col-md-9 col-12 m-auto'}>
-					<Card>
-						<Card.Header className={'bg-transparent'}>
-							<div className={'d-flex justify-content-between align-items-center'}>
-								<div className='d-flex justify-content-center align-items-end'>
-									<h3 className={'m-0 me-2'}>Cartões -</h3>
-									<span className='text-muted'>{cartoes.length} cartões cadastrados</span>
-								</div>
-
-								<Link
-									href={'/usuario/cartao/cadastro'}
-									className={'btn btn-sm btn-dark'}
-								>
-									Cadastrar cartão
-								</Link>
+			<div className={'col-md-9 col-12 m-auto'}>
+				<Card>
+					<Card.Header className={'bg-transparent'}>
+						<div className={'d-flex justify-content-between align-items-center'}>
+							<div className='d-flex justify-content-center align-items-end'>
+								<h3 className={'m-0 me-2'}>Cartões -</h3>
+								<span className='text-muted'>{cartoes.length} cartões cadastrados</span>
 							</div>
-						</Card.Header>
 
-						<Card.Body>
-							<div
-								style={{ maxHeight: 200, overflowY: 'auto' }}
+							<Link
+								href={'/usuario/cartao/cadastro'}
+								className={'btn btn-sm btn-dark'}
 							>
-								{rows}
-							</div>
-						</Card.Body>
-					</Card>
-				</div>
+								Cadastrar cartão
+							</Link>
+						</div>
+					</Card.Header>
+
+					<Card.Body>
+						<div
+							style={{ maxHeight: 200, overflowY: 'auto' }}
+						>
+							{rows}
+						</div>
+					</Card.Body>
+				</Card>
 			</div>
 
 			{isModalExcluirOpen && (
