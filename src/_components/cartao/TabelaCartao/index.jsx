@@ -45,7 +45,7 @@ const TabelaCartao = () => {
 	function cartoesToRows() {
 		const length = cartoes.length
 		return cartoes.map((c, index) => {
-			const res = c.bandeira.bandeira + ' - ' + c.nomeTitular
+			const res = c.bandeira.bandeira + ' - ' + c.nomeTitular + (c.preferencial ? ' (Preferencial)' : '')
 			const shouldReturnHr = index < length - 1
 
 			return (
