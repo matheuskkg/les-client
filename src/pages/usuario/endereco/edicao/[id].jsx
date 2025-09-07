@@ -15,7 +15,7 @@ const EdicaoEndereco = () => {
         await service.editar(endereco)
 
         toast.success('Endereço editado.')
-        router.replace('/usuario/endereco')
+        router.replace('/usuario/perfil')
     }
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const EdicaoEndereco = () => {
                     title: 'Cancelar edição',
                     message: 'Tem certeza que deseja cancelar a edição?'
                 },
-                pathCancelar: '/usuario/endereco'
+                pathCancelar: '/usuario/perfil'
             }}
         />
     )
