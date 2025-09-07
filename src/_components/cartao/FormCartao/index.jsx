@@ -89,12 +89,10 @@ const FormCartao = ({ obj, onChange }) => {
 				)}
 			</div>
 
-			<div className="d-flex">
-				<FormGroup>
-					<Checkbox id={'preferencial'} name={'preferencial'} value={obj.preferencial} onChange={onChange} />
-					<Label htmlFor={'preferencial'} label={'Preferencial'} variant={'check-label'} className={'ms-1'} />
-				</FormGroup>
-			</div>
+			<FormGroup>
+				<Checkbox id={'preferencial'} name={'preferencial'} value={obj.preferencial} onChange={onChange} />
+				<Label htmlFor={'preferencial'} label={'Preferencial'} variant={'check-label'} className={'ms-1'} />
+			</FormGroup>
 		</>
 	)
 }
