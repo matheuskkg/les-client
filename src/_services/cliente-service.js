@@ -17,6 +17,10 @@ export default class ClienteService extends ApiService {
 		return this.patch('/senha', senha)
 	}
 
+	inativar() {
+		return this.delete('')
+	}
+
 	consultar(filtro) {
 		return this.get('', filtro)
 	}
