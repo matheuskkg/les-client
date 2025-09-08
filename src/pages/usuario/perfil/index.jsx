@@ -2,6 +2,7 @@ import TabelaCartao from "@/_components/cartao/TabelaCartao"
 import TabelaEndereco from "@/_components/endereco/TabelaEndereco"
 import Card from "@/_components/core/Card"
 import Link from "next/link"
+import InativarUsuario from "@/_components/usuario/InativarUsuario"
 
 const Perfil = () => {
     return (
@@ -15,6 +16,7 @@ const Perfil = () => {
                         <Card.Body>
                             <p className={'m-0'}><Link href={'/usuario/perfil/dados-pessoais'}>Alterar dados pessoais</Link></p>
                             <p className={'m-0'}><Link href={'/usuario/perfil/alterar-senha'}>Alterar senha</Link></p>
+                            <InativarUsuario />
                         </Card.Body>
                     </Card>
                 </div>
