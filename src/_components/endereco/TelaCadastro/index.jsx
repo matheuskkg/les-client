@@ -35,7 +35,7 @@ const TelaCadastro = ({ initialEndereco, info, onSubmit }) => {
 		try {
 			validar(endereco)
 
-			onSubmit(endereco)
+			await onSubmit(endereco)
 		} catch (error) {
 			const mensagens = error.response?.data?.mensagens || error.mensagens || [error.message]
 
