@@ -38,7 +38,7 @@ const TelaCadastro = ({ initialCartao, info, onSubmit }) => {
         try {
             validar(cartao)
 
-            onSubmit(cartao)
+            await onSubmit(cartao)
         } catch (error) {
             const mensagens = error.response?.data?.mensagens || error.mensagens || [error.message]
 
