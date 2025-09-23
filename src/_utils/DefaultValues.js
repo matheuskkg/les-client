@@ -50,6 +50,7 @@ export function defaultEndereco() {
 export function defaultCartao() {
 	return {
 		bandeira: {
+			id: '',
 			bandeira: '',
 		},
 		nomeTitular: '',

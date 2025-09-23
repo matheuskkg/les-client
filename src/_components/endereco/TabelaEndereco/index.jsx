@@ -1,0 +1,161 @@
+import Button from '@/_components/core/Button'
+import Card from '@/_components/core/Card'
+import { Modal } from 'antd'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import ClienteService from '@/_services/cliente-service'
+import EnderecoService from '@/_services/endereco-service'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+
+const TabelaEndereco = () => {
+    const [enderecos, setEnderecos] = useState([])
+    const [rows, setRows] = useState([])
+    const [isModalExcluirOpen, setIsModalExcluirOpen] = useState(false)
+    const [enderecoExcluindo, setEnderecoExcluindo] = useState({})
+
+    const service = new ClienteService()
+    const enderecoService = new EnderecoService()
+    const router = useRouter()
+
+    function showModalExcluir(endereco) {
+        setEnderecoExcluindo(endereco)
+        setIsModalExcluirOpen(true)
+    }
+
+    function closeModalExcluir() {
+        setIsModalExcluirOpen(false)
+    }
+
+    async function handleExcluirEndereco() {
+        try {
+            await enderecoService.excluir(enderecoExcluindo)
+
+            toast.success('Endereço excluído.')
+            closeModalExcluir()
+
+            setEnderecos(prev => prev.filter(e => e.id !== enderecoExcluindo.id))
+        } catch (error) {
+            const mensagens = error.response?.data?.mensagens || ['Erro ao excluir endereço.']
+
+            mensagens.forEach(mensagem => toast.error(mensagem))
+        }
+    }
+
+    function enderecosToRows() {
+        const length = enderecos.length
+        return enderecos.map((e, index) => {
+            const res = e.tipoLogradouro.tipo + ' ' + e.logradouro + ', ' + e.cidade + ' - ' + e.estado
+            const shouldReturnHr = index < length - 1
+
+            return (
+                <div key={e.id}>
+                    <div className="d-flex justify-content-between align-items-center mx-2">
+                        <p className="my-0">{res}</p>
+
+                        <div>
+                            <Button
+                                className="me-1"
+                                variant={'dark'}
+                                icon={<i className="bi bi-pencil"></i>}
+                                onClick={() => router.push(`/usuario/endereco/edicao/${e.id}`)}
+                            />
+
+                            <Button
+                                variant={'dark'}
+                                icon={<i className="bi bi-trash3"></i>}
+                                onClick={() => showModalExcluir(e)}
+                            />
+                        </div>
+                    </div>
+
+                    {
+                        shouldReturnHr && <hr className="m-1" />
+                    }
+                </div>
+            )
+        })
+    }
+
+    useEffect(() => {
+        async function consultar() {
+            try {
+                const response = await service.consultarEnderecos()
+
+                setEnderecos(response.data.entidades)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        consultar()
+    }, [])
+
+    useEffect(() => {
+        setRows(enderecosToRows())
+    }, [enderecos])
+
+    return (
+        <>
+            <div className="col-md-9 col-12 m-auto">
+                <Card>
+                    <Card.Header className={'bg-transparent'}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div className='d-flex justify-content-center align-items-end'>
+                                <h3 className={'m-0 me-2'}>Endereços -</h3>
+                                <span className='text-muted'>{enderecos.length} endereços cadastrados</span>
+                            </div>
+
+                            <Link
+                                href={'/usuario/endereco/cadastro'}
+                                className={'btn btn-sm btn-dark'}
+                            >
+                                Cadastrar endereço
+                            </Link>
+                        </div>
+                    </Card.Header>
+
+                    <Card.Body>
+                        <div
+                            style={{ maxHeight: 200, overflowY: 'auto' }}
+                        >
+                            {rows}
+                        </div>
+                    </Card.Body>
+                </Card>
+            </div>
+
+            {isModalExcluirOpen && (
+                <Modal
+                    centered={true}
+                    title={<h3>Excluir endereço ({enderecoExcluindo.nomeIdentificador})</h3>}
+                    open={isModalExcluirOpen}
+                    onCancel={closeModalExcluir}
+                    footer={
+                        <div className={'d-flex justify-content-evenly align-items-center'}>
+                            <Button
+                                className={'w-100 me-2'}
+                                icon={<i className="bi bi-x-lg"></i>}
+                                text={'Cancelar'}
+                                variant={'dark'}
+                                onClick={closeModalExcluir}
+                            />
+
+                            <Button
+                                className={'w-100 ms-2'}
+                                icon={<i className="bi bi-check-lg"></i>}
+                                text={'Excluir'}
+                                variant={'dark'}
+                                onClick={handleExcluirEndereco}
+                            />
+                        </div>
+                    }
+                >
+                    <p>Tem certeza que deseja excluir esse endereço?</p>
+                </Modal>
+            )}
+        </>
+    )
+}
+
+export default TabelaEndereco
